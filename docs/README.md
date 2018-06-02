@@ -24,3 +24,8 @@ This script transforms Instagram's json files - [that you get via the Data Downl
 - I didn't find a proper way of processing all the strings that contain emoji and other weird characters, so I created a function that removes most of the special characters. This sometimes creates really ugly captions!
 - I didn't include contacts.json and likes.json, since I didn't sync my contacts and therefore had no data available on that. When it comes to likes.json I didn't find it very important since there is no information what exactly was liked! Feel free to extend the script to your needs!
 - This is rather experimental since I only had my own data to test this with, there's no guarantee that this also works with your data!
+
+## Download
+
+- ZIP: [DOWNLOAD](https://github.com/t0xic-m/instagram_data_download_viewer/archive/master.zip)
+- TAR.GZ: [DOWNLOAD](https://github.com/t0xic-m/instagram_data_download_viewer/archive/master.tar.gz)
