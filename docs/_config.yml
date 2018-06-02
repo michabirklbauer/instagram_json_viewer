@@ -1,1 +1,7 @@
 theme: jekyll-theme-cayman
+title: "Instagram Data Download Viewer by Micha Birklbauer"
+description: "Project Website for Instagram Data Download Viewer"
+show_downloads: "true"
+github:
+  zip_url: https://github.com/t0xic-m/instagram_data_download_viewer/archive/master.zip
+  tar_url: https://github.com/t0xic-m/instagram_data_download_viewer/archive/master.tar.gz
