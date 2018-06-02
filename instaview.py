@@ -45,17 +45,17 @@ if __name__ == '__main__':
 	with open("instaview.Rmd", "a") as rmd_file:
 	
 		# getting profile information
-		with open("profile.json", "r") as profile:
+		with open("profile.json", "r", errors="replace") as profile:
 			profile_content = profile.read()
 			profile.close()
 		profile_json = json.loads(profile_content)
 		rmd_file.write("# Profile Information\n\n")
 		for item in profile_json:
-			w = san(str(item)) + " : " + san(str(profile_json[item])) + "\n\n"
+			w = san(str(item)) + " : " + sansan(san(str(profile_json[item]))) + "\n\n"
 			rmd_file.write(w)
 
 		# getting profile settings
-		with open("settings.json", "r") as settings:
+		with open("settings.json", "r", errors="replace") as settings:
 			settings_content = settings.read()
 			settings.close()
 		settings_json = json.loads(settings_content)
@@ -65,19 +65,19 @@ if __name__ == '__main__':
 			rmd_file.write(w)
 
 		# getting profile searches
-		with open("searches.json", "r") as searches:
+		with open("searches.json", "r", errors="replace") as searches:
 			searches_content = searches.read()
 			searches.close()
 		searches_json = json.loads(searches_content)
 		rmd_file.write("# Profile Searches\n\n")
 		for item in searches_json:
 			for subitem in item:
-				w = san(str(subitem)) + " : " + san(str(item[subitem])) + "\n\n"
+				w = san(str(subitem)) + " : " + sansan(san(str(item[subitem]))) + "\n\n"
 				rmd_file.write(w)
 			rmd_file.write("\\_\\_\\_\\_\\_\n\n")
 
 		# getting profile connections
-		with open("connections.json", "r") as connections:
+		with open("connections.json", "r", errors="replace") as connections:
 			connections_content = connections.read()
 			connections.close()
 		connections_json = json.loads(connections_content)
