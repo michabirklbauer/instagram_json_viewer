@@ -1,11 +1,11 @@
 # Instagram Data Download Viewer
 
-This script transforms Instagram's json files - [that you get via the Data Download Tool](https://www.cnet.com/how-to/how-to-download-all-your-instagram-data/) - to a readable format!
+This script transforms Instagram's data - [that you get via the Data Download Tool](https://www.cnet.com/how-to/how-to-download-all-your-instagram-data/) - to a readable format!
 
 ## Features
 
-- Transforms profile information, media and messages to a readable format in Rmarkdown
-- Possibility to create a nice pdf file with a table of contents for easy navigation
+- Transforms profile information, media and messages to a more readable format in Rmarkdown
+- Possibility to create a nicely structured PDF-file with a table of contents for easy navigation
 
 ## Requirements
 
@@ -14,10 +14,12 @@ This script transforms Instagram's json files - [that you get via the Data Downl
 
 ## Usage
 
-- Put "instaview.py" and "instaview.R" into the data directory (where the json-files are!)
+- Put "instaview.py" and "instaview.R" into the data directory (e.g. where the all json-files are!)
 - Back up your instagram data before you run anything!
-- Run "instaview.py"!
-- If R can't process the Rmarkdown, try opening RStudio and manually knitting it or running the code from "instaview.R" manually!"
+- Run "instaview.py" via commandline or doubleclick!
+- If R can't process the Rmarkdown:
+  - try opening it in RStudio and manually knitting it 
+  - OR try running the code from "instaview.R" manually in Rstudio!"
 
 ## Issues
 
