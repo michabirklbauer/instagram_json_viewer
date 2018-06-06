@@ -27,6 +27,10 @@ This script transforms Instagram's data - [that you get via the Data Download To
 - I didn't include contacts.json and likes.json, since I didn't sync my contacts and therefore had no data available on that. When it comes to likes.json I didn't find it very important since there is no information what exactly was liked! Feel free to extend the script to your needs!
 - This is rather experimental since I only had my own data to test this with, there's no guarantee that this also works with your data!
 
+## License
+
+[MIT License](https://github.com/t0xic-m/instagram_data_download_viewer/blob/master/LICENSE.md)
+
 ## Download
 
 - ZIP: [DOWNLOAD](https://github.com/t0xic-m/instagram_data_download_viewer/archive/master.zip)
