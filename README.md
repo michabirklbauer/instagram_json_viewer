@@ -18,7 +18,7 @@ This script transforms Instagram's data - [that you get via the Data Download To
 - Back up your instagram data before you run anything!
 - Run "instaview.py" via commandline or doubleclick!
 - If R can't process the Rmarkdown:
-  - try opening it RStudio and manually knitting it 
+  - try opening it in RStudio and manually knitting it 
   - OR try running the code from "instaview.R" manually in Rstudio!"
 
 ## Issues
