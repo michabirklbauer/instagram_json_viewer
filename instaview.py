@@ -21,7 +21,7 @@ def san(some_string):
 
 # sanitizing emoji and weird characters
 def sansan(some_string):
-	allowed = ["/", " ", "#", "@", "+", "[", "]", "(", ")", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "\\", "_", ":", "," , ".", ";", "-", "!", "?", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" ]
+	allowed = ["/", "\"", "{", "}", "\'", " ", "#", "@", "+", "[", "]", "(", ")", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "\\", "_", ":", "," , ".", ";", "-", "!", "?", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" ]
 	word = ""
 	for char in some_string:
 		if char.upper() in allowed:
@@ -146,6 +146,12 @@ if __name__ == '__main__':
 				for item in message:
 					w = sansan(san(str(item))) + " : " + sansan(san(str(message[item]))) + "\n\n"
 					rmd_file.write(w)
+				rmd_file.write("\\_\\_\\_\\_\\_\n\n") 
+					
+		# credits
+		w = "# Credits\n\nThis document was created using Micha Birklbauer's [Instagram Data Download Viewer](https://github.com/t0xic-m/instagram_data_download_viewer)."
+		rmd_file.write(w)
+		
 		rmd_file.close()
 
 	# try knitting to pdf
