@@ -12,6 +12,10 @@ This script transforms Instagram's data - [that you get via the Data Download To
 - Python (version 3.0 and above)
 - An R installation that can process Rmarkdown (knitr, working LaTeX processor, ...)
 
+## Tutorial Video
+
+- [Youtube](https://www.youtube.com/watch?v=w-uz1AfLCk8)
+
 ## Usage
 
 - Put "instaview.py" and "instaview.R" into the data directory (e.g. where the all json-files are!)
