@@ -14,6 +14,8 @@ This script transforms Instagram's data - [that you get via the Data Download To
 
 ## Usage
 
+Tutorial Video: [https://www.youtube.com/watch?v=w-uz1AfLCk8](https://www.youtube.com/watch?v=w-uz1AfLCk8)
+
 - Put "instaview.py" and "instaview.R" into the data directory (e.g. where the all json-files are!)
 - Back up your instagram data before you run anything!
 - Run "instaview.py" via commandline or doubleclick!
