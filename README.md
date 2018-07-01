@@ -12,6 +12,10 @@ This script transforms Instagram's data - [that you get via the Data Download To
 - Python (version 3.0 and above)
 - An R installation that can process Rmarkdown (knitr, working LaTeX processor, ...)
 
+## Data Download
+
+Here you can download your data: [Instagram](https://www.instagram.com/download/request/)
+
 ## Usage
 
 Tutorial Video: [https://www.youtube.com/watch?v=w-uz1AfLCk8](https://www.youtube.com/watch?v=w-uz1AfLCk8)
