@@ -2,7 +2,7 @@
 
 This script transforms Instagram's data - [that you get via the Data Download Tool](https://www.cnet.com/how-to/how-to-download-all-your-instagram-data/) - to a readable format!
 
-[![TutorialVideo](https://img.youtube.com/vi/w-uz1AfLCk8/0.jpg)](https://www.youtube.com/watch?v=w-uz1AfLCk8)
+[![TutorialVideo](https://img.youtube.com/vi/w-uz1AfLCk8/maxresdefault.jpg)](https://www.youtube.com/watch?v=w-uz1AfLCk8)
 
 
 ## Features
