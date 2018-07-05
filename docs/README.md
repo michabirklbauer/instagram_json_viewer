@@ -2,6 +2,9 @@
 
 This script transforms Instagram's data - [that you get via the Data Download Tool](https://www.cnet.com/how-to/how-to-download-all-your-instagram-data/) - to a readable format!
 
+[![TutorialVideo](https://img.youtube.com/vi/w-uz1AfLCk8/0.jpg)](https://www.youtube.com/watch?v=w-uz1AfLCk8)
+
+
 ## Features
 
 - Transforms profile information, media and messages to a more readable format in Rmarkdown
@@ -15,6 +18,10 @@ This script transforms Instagram's data - [that you get via the Data Download To
 ## Tutorial Video
 
 - [Youtube](https://www.youtube.com/watch?v=w-uz1AfLCk8)
+
+## Data Download
+
+Here you can download your data: [Instagram](https://www.instagram.com/download/request/)
 
 ## Usage
 
