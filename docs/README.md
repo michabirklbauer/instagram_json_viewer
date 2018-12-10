@@ -46,3 +46,9 @@ Here you can download your data: [Instagram](https://www.instagram.com/download/
 
 - ZIP: [DOWNLOAD](https://github.com/t0xic-m/instagram_data_download_viewer/archive/master.zip)
 - TAR.GZ: [DOWNLOAD](https://github.com/t0xic-m/instagram_data_download_viewer/archive/master.tar.gz)
+
+## Contact
+
+- Website: [Web](https://t0xic-m.github.io/web)
+- Website: [GitHub](https://t0xic-m.github.io/)
+- Contact: [Mail](mailto:micha.birklbauer@gmail.com)
