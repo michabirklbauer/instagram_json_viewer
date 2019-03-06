@@ -2,7 +2,7 @@
 
 #
 # This script doesn't take any arguments and produces a R markdown file that contains all the instagram information
-# it also calls R at the end to create a pdf file 
+# it also calls R at the end to create a pdf file
 # if that fails: try to knit it in RStudio
 # requires a working knitr setup (including LaTeX)
 #
@@ -31,7 +31,7 @@ def sansan(some_string):
 	return str(word)
 
 if __name__ == '__main__':
-	
+
 	# get date
 	today = datetime.datetime.today().strftime('%d-%m-%Y')
 	# Rmd header definition
@@ -41,9 +41,9 @@ if __name__ == '__main__':
 	with open("instaview.Rmd", "w") as rmd_file:
 		rmd_file.write(rmd_header)
 		rmd_file.close()
-	
+
 	with open("instaview.Rmd", "a") as rmd_file:
-	
+
 		# getting profile information
 		with open("profile.json", "r", errors="replace") as profile:
 			profile_content = profile.read()
@@ -100,6 +100,9 @@ if __name__ == '__main__':
 			w = "## " + san(str(media_type)) + "\n\n"
 			rmd_file.write(w)
 			for item in media_json[str(media_type)]:
+				# delete the following 2 lines if your videos have paths!
+				if media_type = "videos":
+					continue
 				if media_type != "direct":
 					p = str(item["path"])
 					file_ending = p.split(".")[-1]
@@ -146,12 +149,12 @@ if __name__ == '__main__':
 				for item in message:
 					w = sansan(san(str(item))) + " : " + sansan(san(str(message[item]))) + "\n\n"
 					rmd_file.write(w)
-				rmd_file.write("\\_\\_\\_\\_\\_\n\n") 
-					
+				rmd_file.write("\\_\\_\\_\\_\\_\n\n")
+
 		# credits
 		w = "# Credits\n\nThis document was created using Micha Birklbauer's [Instagram Data Download Viewer](https://github.com/t0xic-m/instagram_data_download_viewer)."
 		rmd_file.write(w)
-		
+
 		rmd_file.close()
 
 	# try knitting to pdf
