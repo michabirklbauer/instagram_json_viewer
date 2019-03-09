@@ -101,7 +101,7 @@ if __name__ == '__main__':
 			rmd_file.write(w)
 			for item in media_json[str(media_type)]:
 				# delete the following 2 lines if your videos have paths!
-				if media_type = "videos":
+				if media_type == "videos":
 					continue
 				if media_type != "direct":
 					p = str(item["path"])
