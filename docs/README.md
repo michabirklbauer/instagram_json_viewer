@@ -24,6 +24,8 @@ Here you can download your data: [Instagram](https://www.instagram.com/download/
 
 ## Basic Usage
 
+Tutorial Video: [https://www.youtube.com/watch?v=0CUbTkrK62M](https://www.youtube.com/watch?v=0CUbTkrK62M)
+
 - Back up your instagram data before you run anything!
 - Put "instaview.py" into the data directory (e.g. where the all json-files are!)  
   E.g. my downloaded zip-archive was named "micha_birklbauer_20200316.zip", extracted the directory looked like this:
