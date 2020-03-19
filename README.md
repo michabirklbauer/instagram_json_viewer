@@ -25,7 +25,7 @@ Here you can download your data: [Instagram](https://www.instagram.com/download/
 ## Basic Usage
 
 - Back up your instagram data before you run anything!
-- Put "instaview.py" into the data directory (e.g. where the all json-files are!)
+- Put "instaview.py" into the data directory (e.g. where the all json-files are!)  
   E.g. my downloaded zip-archive was named "micha_birklbauer_20200316.zip", extracted the directory looked like this:
   ```
   +---- micha_birklbauer_20200316
@@ -62,43 +62,43 @@ instaview()
 ```
 
 **Functions:**
-- read_profile(filename = "profile.json"):
+- **read_profile(filename = "profile.json"):**  
   Reads profile information from json file and returns readable and structured html string.
-  - Args:
+  - **Args:**
     - filename (str): Path to json with profile information. Default: "profile.json"
-  - Return (str): json converted to html
-- read_searches(filename = "searches.json"):
+  - **Return (str):** json converted to html
+- **read_searches(filename = "searches.json"):**  
   Reads search information from json file and returns readable and structured html string.
-  - Args:
+  - **Args:**
     - filename (str): Path to json with search information. Default: "searches.json"
-  - Return (str): json converted to html
-- read_connections(filename = "connections.json"):
+  - **Return (str):** json converted to html
+- **read_connections(filename = "connections.json"):**  
   Reads connection information from json file and returns readable and structured html string.
-  - Args:
+  - **Args:**
     - filename (str): Path to json with connection information. Default: "connections.json"
-  - Return (str): json converted to html
-- read_media(filename = "media.json"):
+  - **Return (str):** json converted to html
+- **read_media(filename = "media.json"):**  
   Reads media information from json file and returns readable and structured html string.
-  - Args:
+  - **Args:**
     - filename (str): Path to json with media information. Default: "media.json"
-  - Return (str): json converted to html
-- read_comments(filename = "comments.json"):
+  - **Return (str):** json converted to html
+- **read_comments(filename = "comments.json"):**  
   Reads comment information from json file and returns readable and structured html string.
-  - Args:
+  - **Args:**
     - filename (str): Path to json with comment information. Default: "comments.json"
-  - Return (str): json converted to html
-- read_messages(filename = "messages.json", profile = "profile.json", use_default = True, default_avatar = "DEFAULT", hd = False):
+  - **Return (str):** json converted to html
+- **read_messages(filename = "messages.json", profile = "profile.json", use_default = True, default_avatar = "DEFAULT", hd = False):**  
   Reads message information from json file and creates separate html files for each chat in new "chat" directory. Links to html pages are returned as concatenated html string together with a list of chat participants.
-  - Args:
+  - **Args:**
     - filename (str): Path to json with message information. Default: "messages.json"
     - profile (str): Path to json with profile information. Default: "profile.json"
     - use_default (bool): If default avatar should be used or not. Default: True
     - default_avatar (str): Path to default avatar. Default: Profile Picture from "profile.json"
     - hd (bool): If high definition versions of avatars should be used or not. Default: False
-  - Return (list): [formatted html string (str), list of chats and their participants (list of str)]
-- instaview(default_filenames = True, filenames = ["profile.json", "searches.json", "connections.json", "media.json", "comments.json", "messages.json"], title = "", show_credits = True, \*\*kwargs):
+  - **Return (list):** [formatted html string (str), list of chats and their participants (list of str)]
+- **instaview(default_filenames = True, filenames = ["profile.json", "searches.json", "connections.json", "media.json", "comments.json", "messages.json"], title = "", show_credits = True, \*\*kwargs):**  
   Executes all functions and creates an html report including information from all used json files. Returns 0 if everything went correctly.
-  - Args:
+  - **Args:**
     - default_filenames (bool): If default filenames should be used. Default: True
     - filenames (list of str): A list with paths to the specific json files in the following order:
       1. Profile information
@@ -111,7 +111,7 @@ instaview()
     - title (valid html as str): What the title of the report should be. Default: "INSTAGRAM DATA + [Date]"
     - show_credits (bool): If credits should be added at the bottom of the report. Default: True
     - \*\*kwargs: any additional arguments will be passed to "read_messages()" (see above)
-  - Return (int): 0 if successfully, >0 if unsuccesfull or only partly successful
+  - **Return (int):** 0 if successfully, >0 if unsuccesfull or only partly successful
 
 ## Changes to old release
 
