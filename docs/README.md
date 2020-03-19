@@ -106,7 +106,7 @@ instaview()
       3. Connection information
       4. Media information
       5. Comment information
-      6. Message information
+      6. Message information  
       Default: Default filenames for every function (see above).
     - title (valid html as str): What the title of the report should be. Default: "INSTAGRAM DATA + [Date]".
     - show_credits (bool): If credits should be added at the bottom of the report. Default: True.
