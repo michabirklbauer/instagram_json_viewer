@@ -439,6 +439,7 @@ def read_comments(filename = "comments.json"):
 
     html_string = html_string + "\t</ul>\n\n<h3 id=\"livecomments\">Live Comments</h3>\n\t<ul>\n"
 
+    # this is rather experimental because I had no live comments available
     try:
         if len(live_comments) == 0:
             html_string = html_string + "\t\t<li>None</li>\n"
@@ -447,11 +448,13 @@ def read_comments(filename = "comments.json"):
                 html_string = html_string + "\t\t<li>\n"
                 html_string = html_string + "\t\t\t<b>Live Owner:</b> " + str(item[2]) + "<br>\n\t\t\t<b>Commented on:</b> " + str(item[0]) + "<br>\n\t\t\t<b>Comment:</b> " + str(item[1]) + "\n"
                 html_string = html_string + "\t\t</li>\n"
-    except:
+    except Exception as e:
+        print(e)
         pass
 
     html_string = html_string + "\t</ul>\n\n<h3 id=\"storycomments\">Story Comments</h3>\n\t<ul>\n"
 
+    # this is rather experimental because I had no story comments available
     try:
         if len(story_comments) == 0:
             html_string = html_string + "\t\t<li>None</li>\n"
@@ -460,7 +463,8 @@ def read_comments(filename = "comments.json"):
                 html_string = html_string + "\t\t<li>\n"
                 html_string = html_string + "\t\t\t<b>Story Owner:</b> " + str(item[2]) + "<br>\n\t\t\t<b>Commented on:</b> " + str(item[0]) + "<br>\n\t\t\t<b>Comment:</b> " + str(item[1]) + "\n"
                 html_string = html_string + "\t\t</li>\n"
-    except:
+    except Exception as e:
+        print(e)
         pass
 
     html_string = html_string + "\t</ul>\n<hr>\n"
@@ -660,17 +664,17 @@ def instaview(default_filenames = True, filenames = ["profile.json", "searches.j
             print("ERROR reading media!")
             print(e)
         try:
-            e = read_comments()
+            g = read_comments()
         except Exception as e:
-            e = ""
+            g = ""
             result = result + 16
             print("ERROR reading comments!")
             print(e)
 
         if show_credits:
-            complete_html = html_template + sidebar + "<div class=\"main\">\n\n" + title + a + b + c + d + e + chat_string + credits + end_html
+            complete_html = html_template + sidebar + "<div class=\"main\">\n\n" + title + a + b + c + d + g + chat_string + credits + end_html
         else:
-            complete_html = html_template + sidebar + "<div class=\"main\">\n\n" + title + a + b + c + d + e + chat_string + end_html
+            complete_html = html_template + sidebar + "<div class=\"main\">\n\n" + title + a + b + c + d + g + chat_string + end_html
 
         with open("instaview_report.html", "w", encoding="utf-8") as f:
             f.write(complete_html)
@@ -721,17 +725,17 @@ def instaview(default_filenames = True, filenames = ["profile.json", "searches.j
             print("ERROR reading media!")
             print(e)
         try:
-            e = read_comments(filenames[4])
+            g = read_comments(filenames[4])
         except Exception as e:
-            e = ""
+            g = ""
             result = result + 16
             print("ERROR reading comments!")
             print(e)
 
         if show_credits:
-            complete_html = html_template + sidebar + "<div class=\"main\">\n\n" + title + a + b + c + d + e + chat_string + credits + end_html
+            complete_html = html_template + sidebar + "<div class=\"main\">\n\n" + title + a + b + c + d + g + chat_string + credits + end_html
         else:
-            complete_html = html_template + sidebar + "<div class=\"main\">\n\n" + title + a + b + c + d + e + chat_string + end_html
+            complete_html = html_template + sidebar + "<div class=\"main\">\n\n" + title + a + b + c + d + g + chat_string + end_html
 
         with open("instaview_report.html", "w", encoding="utf-8") as f:
             f.write(complete_html)
@@ -741,5 +745,9 @@ def instaview(default_filenames = True, filenames = ["profile.json", "searches.j
 
 if __name__ == '__main__':
     # functions are run with default args when script is executed
-    # this should terminate succesfully if script is in the right directory 
-    instaview()
+    # this should terminate succesfully if script is in the right directory
+    try:
+        instaview()
+    except Exception as e:
+        print("ERROR is script in right directory?")
+        print(e)
