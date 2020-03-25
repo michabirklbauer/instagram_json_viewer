@@ -53,6 +53,7 @@ Tutorial Video: [https://www.youtube.com/watch?v=0CUbTkrK62M](https://www.youtub
   | instaview.py (PYTHON SCRIPT GOES HERE!)
   ```
 - Run "instaview.py" via commandline (recommended) or doubleclick!
+- Alternatively you can run the ["instaview.exe"](https://github.com/t0xic-m/instagram_json_viewer/releases) if you have Windows and do not have python installed (steps are the same).
 - Check "instaview_report.html" in the browser of your choice!
 
 ## Advanced Usage
