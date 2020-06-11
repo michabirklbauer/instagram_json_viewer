@@ -217,79 +217,86 @@ def read_searches(filename = "searches.json"):
 # reading connection information and converting it to html string
 def read_connections(filename = "connections.json"):
 
+    error_code = 0
+
     html_string = "<h2 id=\"connections\">Profile Connections</h2>\n\t<ul>\n"
 
     with open(filename, "r", encoding="utf-8") as f:
         data = json.load(f)
         f.close()
 
-    blocked_users = data["blocked_users"]
-    restricted_users = data["restricted_users"]
-    follow_requests_sent = data["follow_requests_sent"]
-    followers = data["followers"]
-    following = data["following"]
-    following_hashtags = data["following_hashtags"]
-    dismissed_suggested_users = data["dismissed_suggested_users"]
+    try:
+        blocked_users = data["blocked_users"]
+        restricted_users = data["restricted_users"]
+        follow_requests_sent = data["follow_requests_sent"]
+        followers = data["followers"]
+        following = data["following"]
+        following_hashtags = data["following_hashtags"]
+        dismissed_suggested_users = data["dismissed_suggested_users"]
 
-    html_string = html_string + "<h3>Blocked Users</h3>\n\t<ul>\n"
+        html_string = html_string + "<h3>Blocked Users</h3>\n\t<ul>\n"
 
-    if len(blocked_users) == 0:
-        html_string = html_string + "\t\t<li>None</li>\n"
-    else:
-        for item in blocked_users:
-            html_string = html_string + "\t\t<li>" + str(item) + " <b>blocked since</b> " + str(blocked_users[item]) + "</li>\n"
+        if len(blocked_users) == 0:
+            html_string = html_string + "\t\t<li>None</li>\n"
+        else:
+            for item in blocked_users:
+                html_string = html_string + "\t\t<li>" + str(item) + " <b>blocked since</b> " + str(blocked_users[item]) + "</li>\n"
 
-    html_string = html_string + "\t</ul>\n\n<h3>Restricted Users</h3>\n\t<ul>\n"
+        html_string = html_string + "\t</ul>\n\n<h3>Restricted Users</h3>\n\t<ul>\n"
 
-    if len(restricted_users) == 0:
-        html_string = html_string + "\t\t<li>None</li>\n"
-    else:
-        for item in restricted_users:
-            html_string = html_string + "\t\t<li>" + str(item) + " <b>restricted since</b> " + str(restricted_users[item]) + "</li>\n"
+        if len(restricted_users) == 0:
+            html_string = html_string + "\t\t<li>None</li>\n"
+        else:
+            for item in restricted_users:
+                html_string = html_string + "\t\t<li>" + str(item) + " <b>restricted since</b> " + str(restricted_users[item]) + "</li>\n"
 
-    html_string = html_string + "\t</ul>\n\n<h3>Requested Following</h3>\n\t<ul>\n"
+        html_string = html_string + "\t</ul>\n\n<h3>Requested Following</h3>\n\t<ul>\n"
 
-    if len(follow_requests_sent) == 0:
-        html_string = html_string + "\t\t<li>None</li>\n"
-    else:
-        for item in follow_requests_sent:
-            html_string = html_string + "\t\t<li>" + str(item) + " <b>request sent</b> " + str(follow_requests_sent[item]) + "</li>\n"
+        if len(follow_requests_sent) == 0:
+            html_string = html_string + "\t\t<li>None</li>\n"
+        else:
+            for item in follow_requests_sent:
+                html_string = html_string + "\t\t<li>" + str(item) + " <b>request sent</b> " + str(follow_requests_sent[item]) + "</li>\n"
 
-    html_string = html_string + "\t</ul>\n\n<h3>Following Users</h3>\n\t<ul>\n"
+        html_string = html_string + "\t</ul>\n\n<h3>Following Users</h3>\n\t<ul>\n"
 
-    if len(following) == 0:
-        html_string = html_string + "\t\t<li>None</li>\n"
-    else:
-        for item in following:
-            html_string = html_string + "\t\t<li>" + str(item) + " <b>followed since</b> " + str(following[item]) + "</li>\n"
+        if len(following) == 0:
+            html_string = html_string + "\t\t<li>None</li>\n"
+        else:
+            for item in following:
+                html_string = html_string + "\t\t<li>" + str(item) + " <b>followed since</b> " + str(following[item]) + "</li>\n"
 
-    html_string = html_string + "\t</ul>\n\n<h3>Following Hashtags</h3>\n\t<ul>\n"
+        html_string = html_string + "\t</ul>\n\n<h3>Following Hashtags</h3>\n\t<ul>\n"
 
-    if len(following_hashtags) == 0:
-        html_string = html_string + "\t\t<li>None</li>\n"
-    else:
-        for item in following_hashtags:
-            html_string = html_string + "\t\t<li>" + str(item) + " <b>followed since</b> " + str(following_hashtags[item]) + "</li>\n"
+        if len(following_hashtags) == 0:
+            html_string = html_string + "\t\t<li>None</li>\n"
+        else:
+            for item in following_hashtags:
+                html_string = html_string + "\t\t<li>" + str(item) + " <b>followed since</b> " + str(following_hashtags[item]) + "</li>\n"
 
-    html_string = html_string + "\t</ul>\n\n<h3>Followers</h3>\n\t<ul>\n"
+        html_string = html_string + "\t</ul>\n\n<h3>Followers</h3>\n\t<ul>\n"
 
-    if len(followers) == 0:
-        html_string = html_string + "\t\t<li>None</li>\n"
-    else:
-        for item in followers:
-            html_string = html_string + "\t\t<li>" + str(item) + " <b>has followed since</b> " + str(followers[item]) + "</li>\n"
+        if len(followers) == 0:
+            html_string = html_string + "\t\t<li>None</li>\n"
+        else:
+            for item in followers:
+                html_string = html_string + "\t\t<li>" + str(item) + " <b>has followed since</b> " + str(followers[item]) + "</li>\n"
 
-    html_string = html_string + "\t</ul>\n\n<h3>Dismissed Suggested Users</h3>\n\t<ul>\n"
+        html_string = html_string + "\t</ul>\n\n<h3>Dismissed Suggested Users</h3>\n\t<ul>\n"
 
-    if len(dismissed_suggested_users) == 0:
-        html_string = html_string + "\t\t<li>None</li>\n"
-    else:
-        for item in dismissed_suggested_users:
-            html_string = html_string + "\t\t<li>" + str(item) + " <b>dismissed on</b> " + str(dismissed_suggested_users[item]) + "</li>\n"
+        if len(dismissed_suggested_users) == 0:
+            html_string = html_string + "\t\t<li>None</li>\n"
+        else:
+            for item in dismissed_suggested_users:
+                html_string = html_string + "\t\t<li>" + str(item) + " <b>dismissed on</b> " + str(dismissed_suggested_users[item]) + "</li>\n"
+    except Exception as e:
+        print("ERROR reading connections!")
+        print(e)
+        error_code = error_code + 1
 
     html_string = html_string + "\t</ul>\n<hr>\n"
 
-    return html_string
+    return [html_string, error_code]
 
 # reading media information and converting it to html string
 def read_media(filename = "media.json"):
@@ -479,6 +486,8 @@ def read_comments(filename = "comments.json"):
 # so be careful if you don't want things to go sideways
 def read_messages(filename = "messages.json", profile = "profile.json", use_default = True, default_avatar = "DEFAULT", hd = False):
 
+    error_code = 0
+
     try:
         os.mkdir("chat")
     except Exception as e:
@@ -524,88 +533,93 @@ def read_messages(filename = "messages.json", profile = "profile.json", use_defa
     for item in data:
         participants = item["participants"]
 
-        # getting avatars might not work if u send to many requests to instagram
-        # if avatars are not shown correctly in chat, run script again at a different time
-        # or change IP address if u can
-        avatars = {}
-        for participant in participants:
-            avatars[participant] = str(get_avatar(participant))
+        try:
+            # getting avatars might not work if u send to many requests to instagram
+            # if avatars are not shown correctly in chat, run script again at a different time
+            # or change IP address if u can
+            avatars = {}
+            for participant in participants:
+                avatars[participant] = str(get_avatar(participant))
 
-        chat_list.append(participants)
+            chat_list.append(participants)
 
-        conversation = item["conversation"]
+            conversation = item["conversation"]
 
-        html_chat_string = "<h3 id=\"" + str("".join(participants)) + "\">" + str(", ".join(participants)) + "</h3>\n\n"
+            html_chat_string = "<h3 id=\"" + str("".join(participants)) + "\">" + str(", ".join(participants)) + "</h3>\n\n"
 
-        for message in conversation:
-            if message["sender"] == username:
-                html_chat_string = html_chat_string + "<div class=\"container darker\">\n"
-                html_chat_string = html_chat_string + "\t<img src=\"" + str(avatars[message["sender"]]) + "\" alt=\"" + str(message["sender"]).upper() + "\" class=\"right\" style=\"width:100%;\">\n"
-            else:
-                html_chat_string = html_chat_string + "<div class=\"container\">\n"
-                html_chat_string = html_chat_string + "\t<img src=\"" + str(avatars[message["sender"]]) + "\" alt=\"" + str(message["sender"]).upper() + "\" class=\"left\" style=\"width:100%;\">\n"
-
-            if "media_share_url" in message:
-                content = "\t<p>\n\t\t<img src=\"" + str(message["media_share_url"]) + "\"IMAGE\">\n\t\t<br>\n\t\t<b>Media Owner:</b> " + str(message["media_owner"]) + "<br>\n"
-                content = content + "\t\t<b>Media Caption:</b> " + str(message["media_share_caption"]) + "<br>\n"
-                if "text" in message:
-                    content = content + "\t\t<br><b>Text:</b> " + str(message["text"]) + "\n"
-                html_chat_string = html_chat_string + content + "\t</p>\n"
-            elif "voice_media" in message:
-                if message["voice_media"] == "Media unavailable.":
-                    content = "\t<p>\n\t\t<b>Voice Message:</b> Media unavailable.<br>\n"
+            for message in conversation:
+                if message["sender"] == username:
+                    html_chat_string = html_chat_string + "<div class=\"container darker\">\n"
+                    html_chat_string = html_chat_string + "\t<img src=\"" + str(avatars[message["sender"]]) + "\" alt=\"" + str(message["sender"]).upper() + "\" class=\"right\" style=\"width:100%;\">\n"
                 else:
-                    content = "\t<p>\n\t\t<b>Voice Message:</b>\n\t\t<br>\n\t\t\t<audio controls>\n\t\t\t\t<source src=\""
-                    content = content + str(message["voice_media"]) + "\" type=\"audio/mpeg\">\n\t\t\t</audio>\n\t\t<br>\n"
-                if "text" in message:
-                    content = content + "\t\t<br><b>Text:</b> " + str(message["text"]) + "\n"
-                html_chat_string = html_chat_string + content + "\t</p>\n"
-            elif "media" in message:
-                if message["media"].split("?")[0].split(".")[-1] == "mp4":
-                    content = "\t<p>\n\t\t<b>Video:</b>\n\t\t<br>\n\t\t\t<video controls>\n\t\t\t\t<source src=\""
-                    content = content + str(message["media"]) + "\" type=\"video/mp4\">\n\t\t\t</video>\n\t\t<br>\n"
-                elif message["media"].split("?")[0].split(".")[-1] == "m4a":
-                    content = "\t<p>\n\t\t<b>Voice Message:</b>\n\t\t<br>\n\t\t\t<audio controls>\n\t\t\t\t<source src=\""
-                    content = content + str(message["media"]) + "\" type=\"audio/mpeg\">\n\t\t\t</audio>\n\t\t<br>\n"
-                else:
-                    content = "\t<p>\n\t\t<b>Image:</b>\n\t\t<br>\n\t\t\t<img src=\"" + str(message["media"]) + "\" alt=\""
-                    content = content + str(message["media"]) + "\">\n\t\t<br>\n"
-                if "text" in message:
-                    content = content + "\t\t<br><b>Text:</b> " + str(message["text"]) + "\n"
-                html_chat_string = html_chat_string + content + "\t</p>\n"
-            elif "story_share" in message:
-                content = "\t<p>\n\t\t<b>Story Share:</b> " + str(message["story_share"]) + "<br>\n"
-                if "text" in message:
-                    content = content + "\t\t<br><b>Text:</b> " + str(message["text"]) + "\n"
-                html_chat_string = html_chat_string + content + "\t</p>\n"
-            elif "link" in message:
-                content = "\t<p>\n\t\t<b>Link:</b> <a href=\"" + str(message["link"]) + "\"> " + str(message["link"]) + "</a><br>\n"
-                if "text" in message:
-                    content = content + "\t\t<br><b>Text:</b> " + str(message["text"]) + "\n"
-                html_chat_string = html_chat_string + content + "\t</p>\n"
-            else:
-                if "text" in message:
-                    content = "\t<p>\n\t\t<b>Text:</b> " + str(message["text"]) + "\n"
-                else:
-                    content = "\t<p>\n"
-                html_chat_string = html_chat_string + content + "\t</p>\n"
+                    html_chat_string = html_chat_string + "<div class=\"container\">\n"
+                    html_chat_string = html_chat_string + "\t<img src=\"" + str(avatars[message["sender"]]) + "\" alt=\"" + str(message["sender"]).upper() + "\" class=\"left\" style=\"width:100%;\">\n"
 
-            if message["sender"] == username:
-                html_chat_string = html_chat_string + "\t<span class=\"time-left\">" + str(message["created_at"]) + "</span>\n</div>\n\n"
-            else:
-                html_chat_string = html_chat_string + "\t<span class=\"time-right\">" + str(message["created_at"]) + "</span>\n</div>\n\n"
+                if "media_share_url" in message:
+                    content = "\t<p>\n\t\t<img src=\"" + str(message["media_share_url"]) + "\"IMAGE\">\n\t\t<br>\n\t\t<b>Media Owner:</b> " + str(message["media_owner"]) + "<br>\n"
+                    content = content + "\t\t<b>Media Caption:</b> " + str(message["media_share_caption"]) + "<br>\n"
+                    if "text" in message:
+                        content = content + "\t\t<br><b>Text:</b> " + str(message["text"]) + "\n"
+                    html_chat_string = html_chat_string + content + "\t</p>\n"
+                elif "voice_media" in message:
+                    if message["voice_media"] == "Media unavailable.":
+                        content = "\t<p>\n\t\t<b>Voice Message:</b> Media unavailable.<br>\n"
+                    else:
+                        content = "\t<p>\n\t\t<b>Voice Message:</b>\n\t\t<br>\n\t\t\t<audio controls>\n\t\t\t\t<source src=\""
+                        content = content + str(message["voice_media"]) + "\" type=\"audio/mpeg\">\n\t\t\t</audio>\n\t\t<br>\n"
+                    if "text" in message:
+                        content = content + "\t\t<br><b>Text:</b> " + str(message["text"]) + "\n"
+                    html_chat_string = html_chat_string + content + "\t</p>\n"
+                elif "media" in message:
+                    if message["media"].split("?")[0].split(".")[-1] == "mp4":
+                        content = "\t<p>\n\t\t<b>Video:</b>\n\t\t<br>\n\t\t\t<video controls>\n\t\t\t\t<source src=\""
+                        content = content + str(message["media"]) + "\" type=\"video/mp4\">\n\t\t\t</video>\n\t\t<br>\n"
+                    elif message["media"].split("?")[0].split(".")[-1] == "m4a":
+                        content = "\t<p>\n\t\t<b>Voice Message:</b>\n\t\t<br>\n\t\t\t<audio controls>\n\t\t\t\t<source src=\""
+                        content = content + str(message["media"]) + "\" type=\"audio/mpeg\">\n\t\t\t</audio>\n\t\t<br>\n"
+                    else:
+                        content = "\t<p>\n\t\t<b>Image:</b>\n\t\t<br>\n\t\t\t<img src=\"" + str(message["media"]) + "\" alt=\""
+                        content = content + str(message["media"]) + "\">\n\t\t<br>\n"
+                    if "text" in message:
+                        content = content + "\t\t<br><b>Text:</b> " + str(message["text"]) + "\n"
+                    html_chat_string = html_chat_string + content + "\t</p>\n"
+                elif "story_share" in message:
+                    content = "\t<p>\n\t\t<b>Story Share:</b> " + str(message["story_share"]) + "<br>\n"
+                    if "text" in message:
+                        content = content + "\t\t<br><b>Text:</b> " + str(message["text"]) + "\n"
+                    html_chat_string = html_chat_string + content + "\t</p>\n"
+                elif "link" in message:
+                    content = "\t<p>\n\t\t<b>Link:</b> <a href=\"" + str(message["link"]) + "\"> " + str(message["link"]) + "</a><br>\n"
+                    if "text" in message:
+                        content = content + "\t\t<br><b>Text:</b> " + str(message["text"]) + "\n"
+                    html_chat_string = html_chat_string + content + "\t</p>\n"
+                else:
+                    if "text" in message:
+                        content = "\t<p>\n\t\t<b>Text:</b> " + str(message["text"]) + "\n"
+                    else:
+                        content = "\t<p>\n"
+                    html_chat_string = html_chat_string + content + "\t</p>\n"
 
-        html_chat_string = html_chat_string + "<hr>\n"
-        ext_filename = "chat/" + str(len(chat_list)) + ".html"
-        with open(ext_filename, "w", encoding="utf-8") as f:
-            content = html_template + "<h2 id=\"messages\">Messages</h2>\n\n" + html_chat_string + "</body></html>"
-            f.write(content)
-            f.close()
-        html_string = html_string + "<li><a href=\"" + str(ext_filename) + "\" target=\"_blank\">" + str(", ".join(participants)) + "</a></li>\n"
+                if message["sender"] == username:
+                    html_chat_string = html_chat_string + "\t<span class=\"time-left\">" + str(message["created_at"]) + "</span>\n</div>\n\n"
+                else:
+                    html_chat_string = html_chat_string + "\t<span class=\"time-right\">" + str(message["created_at"]) + "</span>\n</div>\n\n"
+
+            html_chat_string = html_chat_string + "<hr>\n"
+            ext_filename = "chat/" + str(len(chat_list)) + ".html"
+            with open(ext_filename, "w", encoding="utf-8") as f:
+                content = html_template + "<h2 id=\"messages\">Messages</h2>\n\n" + html_chat_string + "</body></html>"
+                f.write(content)
+                f.close()
+            html_string = html_string + "<li><a href=\"" + str(ext_filename) + "\" target=\"_blank\">" + str(", ".join(participants)) + "</a></li>\n"
+        except Exception as e:
+            print("ERROR reading messages!")
+            print(e)
+            error_code = error_code + 1
 
     html_string = html_string + "</ul>\n"
 
-    return [html_string, chat_list]
+    return [html_string, chat_list, error_code]
 
 # main function = executes all previous functions and concatenates html string to html file
 # title can be changed as title = "<h1>YOUR TITLE HERE</h1>\n" (should be html)
@@ -621,7 +635,9 @@ def instaview(default_filenames = True, filenames = ["profile.json", "searches.j
 
     if default_filenames:
         try:
-            chat_string, chat_list = read_messages(**kwargs)
+            chat_string, chat_list, error_code = read_messages(**kwargs)
+            if error_code != 0:
+                print("ERROR reading ", str(error_code), " chats!")
         except Exception as e:
             chat_string, chat_list = ["", []]
             result = result + 32
@@ -650,7 +666,9 @@ def instaview(default_filenames = True, filenames = ["profile.json", "searches.j
             print("ERROR reading searches!")
             print(e)
         try:
-            c = read_connections()
+            c, error_code = read_connections()
+            if error_code != 0:
+                print("ERROR reading ", str(error_code), " connections!")
         except Exception as e:
             c = ""
             result = result + 4
@@ -682,7 +700,9 @@ def instaview(default_filenames = True, filenames = ["profile.json", "searches.j
 
     else:
         try:
-            chat_string, chat_list = read_messages(filename = filenames[5], **kwargs)
+            chat_string, chat_list, error_code = read_messages(filename = filenames[5], **kwargs)
+            if error_code != 0:
+                print("ERROR reading ", str(error_code), " chats!")
         except Exception as e:
             chat_string, chat_list = ["", []]
             result = result + 32
@@ -711,7 +731,9 @@ def instaview(default_filenames = True, filenames = ["profile.json", "searches.j
             print("ERROR reading searches!")
             print(e)
         try:
-            c = read_connections(filenames[2])
+            c, error_code = read_connections(filenames[2])
+            if error_code != 0:
+                print("ERROR reading ", str(error_code), " connections!")
         except Exception as e:
             c = ""
             result = result + 4
