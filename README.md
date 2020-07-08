@@ -115,7 +115,7 @@ instaview()
     - filename (str): Path to json with message information. Default: "messages.json".
     - profile (str): Path to json with profile information. Default: "profile.json".
     - profile_pic (str): Path or link to profile picture of your own user. Default: None (will be populated by method itself).
-    - default_avatar (str): Path or link to default avatar. Default: None (uses instagram.com/instagram profile picture [1](#Disclaimer)).
+    - default_avatar (str): Path or link to default avatar. Default: None (uses instagram.com/instagram profile picture [\[1\]](#Disclaimer)).
     - download_all (bool): If all media links should be downloaded locally. Warning: This might take a very long time! Default: False.
     - hd (bool): If high definition versions of avatars should be used or not. Default: False.
     - avatars_dict (dict): A dictionary containing usernames and corresponding paths/links to profile pictures. Argument "profile_pic" overwrites user's avatar even if specified in avatars_dict. Default: empty dict (will be populated by method itself)
@@ -167,4 +167,4 @@ instaview()
 
 ## Disclaimer
 
-- The current default avatar is the profile picture of the account [https://instagram.com/instagram](https://instagram.com/instagram)(08. July 2020) and is stored in this github repository for convenience. I do not own (the rights to) this picture!
+- The current default avatar is the profile picture of the account [https://instagram.com/instagram](https://instagram.com/instagram) (08. July 2020) and is stored in this github repository for convenience. I do not own (the rights to) this picture!
