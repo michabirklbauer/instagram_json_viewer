@@ -13,6 +13,7 @@ This script transforms Instagram's data - [that you get via the Data Download To
 - Creates separate html pages for each chat!
 - Easy to use: Just execute the script in json-directory.
 - Functions can be imported and tuned to your needs!
+- [Message statistics](#message-statistics) can be extracted to see your most frequent contacts!
 
 ## Requirements
 
