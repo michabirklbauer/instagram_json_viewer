@@ -30,33 +30,33 @@ Tutorial Video: [https://www.youtube.com/watch?v=0CUbTkrK62M](https://www.youtub
 - If your instagram data is split into multiple files, you have to extract and merge them first (e.g. by copy-pasting the content into a single folder, and/or [merging json-files](https://stackoverflow.com/questions/57422734/how-to-merge-multiple-json-files-into-one-file-in-python)).
 - Put "instaview.py" into the data directory (e.g. where the all json-files are!)  
   E.g. my downloaded zip-archive was named "micha_birklbauer_20200316.zip", extracted the directory looked like this:
-  
-  ```python
-  """
-  +---- micha_birklbauer_20200316
-  + direct
-  + photos
-  + profile
-  + stories
-  + videos
-  | account_history.json
-  | autofill.json
-  | checkout.json
-  | comments.json
-  | connections.json
-  | contacts.json
-  | likes.json
-  | media.json
-  | messages.json
-  | profile.json
-  | saved.json
-  | searches.json
-  | settings.json
-  | stories_activities.json
-  | instaview.py (PYTHON SCRIPT GOES HERE!)
-  """
-  ```
-  
+
+```python
+"""
++---- micha_birklbauer_20200316
++ direct
++ photos
++ profile
++ stories
++ videos
+| account_history.json
+| autofill.json
+| checkout.json
+| comments.json
+| connections.json
+| contacts.json
+| likes.json
+| media.json
+| messages.json
+| profile.json
+| saved.json
+| searches.json
+| settings.json
+| stories_activities.json
+| instaview.py (PYTHON SCRIPT GOES HERE!)
+"""
+```
+
 - Run "instaview.py" via commandline (recommended) or doubleclick!
 - Alternatively you can run the ["instaview.exe"](https://github.com/t0xic-m/instagram_json_viewer/releases) if you have Windows and do not have python installed (steps are the same).
 - Check "instaview_report.html" in the browser of your choice!
