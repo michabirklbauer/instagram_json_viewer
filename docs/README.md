@@ -126,7 +126,7 @@ instaview()
     - chat_list (list of str): List of chats and their participants.
     - status (int): Amount of encountered errors.
     - error_log (str): Log of all encountered errors.
-- **instaview(filenames = ["profile.json", "searches.json", "connections.json", "media.json", "comments.json", "messages.json"], title = None, show_credits = True, logging = True, \*\*kwargs):**  
+- **instaview(filenames = ["profile.json", "searches.json", "connections.json", "media.json", "comments.json", "messages.json"], parse = [True, True, True, True, True, True], title = None, show_credits = True, logging = True, \*\*kwargs):**  
   Executes all functions and creates an html report including information from all used json files. Returns 0 if everything went correctly.
   - **Args:**
     - filenames (list of str): A list with paths to the specific json files in the following order:
