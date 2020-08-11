@@ -20,6 +20,7 @@ html_template = \
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Instagram Data Report">
 <meta name="author" content="Micha Birklbauer">
@@ -164,6 +165,7 @@ sidebar_template = \
     <a href="#livecomments">Live Comments</a>
     <a href="#storycomments">Story Comments</a>
     <a href="#messages">Messages</a>
+    <a href="#devices">Devices</a>
 
 """
 
@@ -670,7 +672,7 @@ def read_comments(filename = "comments.json"):
 # for args refer to README.md
 # there are no input checks, incorrect inputs will lead to crashes!
 # so be careful if you don't want things to go sideways
-def read_messages(filename = "messages.json", profile = "profile.json", profile_pic = None, default_avatar = None, download_all = False, hd = False, avatars_dict = {}):
+def read_messages(filename = "messages.json", profile = "profile.json", reverse_conversations = False, profile_pic = None, default_avatar = None, download_all = False, hd = False, avatars_dict = {}):
 
     # error controls and logging
     status = 0
@@ -817,7 +819,10 @@ def read_messages(filename = "messages.json", profile = "profile.json", profile_
 
             chat_list.append(participants)
 
-            conversation = item["conversation"]
+            if reverse_conversations:
+                conversation = reversed(item["conversation"])
+            else:
+                conversation = item["conversation"]
 
             html_chat_string = "<h3 id=\"" + str("".join(participants)) + "\">" + str(", ".join(participants)) + "</h3>\n\n"
 
@@ -901,12 +906,51 @@ def read_messages(filename = "messages.json", profile = "profile.json", profile_
 
     return [html_string, chat_list, status, error_log]
 
+# reading device information and converting it to html string
+def read_devices(filename = "devices.json"):
+
+    # error controls and logging
+    status = 0
+    errors = []
+
+    # html template
+    html_string = "<h2 id=\"devices\">Devices</h2>\n\t<ul>\n"
+
+    # json to html conversion
+    try:
+        with open(filename, "r", encoding="utf-8") as f:
+            data = json.load(f)
+            f.close()
+
+        for device in data:
+            item_counter = 1
+            html_string = html_string + "\t\t<li><b>" + str(device) + "</b></li>\n\t\t\t<ul>\n"
+            for item in data[device]:
+                html_string = html_string + "\t\t\t\t<li><b>Item " + str(item_counter) + "</b></li>\n\t\t\t\t\t<ul>\n"
+                for key in item:
+                    html_string = html_string + "\t\t\t\t\t\t<li><b>" + str(key) + ":</b> " + str(item[key]) + "</li>\n"
+                html_string = html_string + "\t\t\t</ul>\n"
+                item_counter = item_counter + 1
+            html_string = html_string + "\t\t\t</ul>\n"
+    except Exception as e:
+        print("ERROR reading devices!")
+        print(e)
+        errors.append(str(e))
+        status = status + 1
+
+    html_string = html_string + "\t</ul>\n<hr>\n"
+
+    # creating an error log for file output
+    error_log = "Encountered errors reading devices: " + str(status) + "\nError messages:\n" + str("\n".join(errors)) + "\n\n"
+
+    return [html_string, status, error_log]
+
 # main function = executes all previous functions and concatenates html string to html file
 # title can be changed as title = "<h1>YOUR TITLE HERE</h1>\n" (should be html)
 # for args refer to README.md again
 # needless to say that there are no input checks here either, incorrect inputs will lead to crashes!
 # so be careful if you don't want things to go sideways
-def instaview(filenames = ["profile.json", "searches.json", "connections.json", "media.json", "comments.json", "messages.json"], parse = [True, True, True, True, True, True], title = None, show_credits = True, logging = True, **kwargs):
+def instaview(filenames = ["profile.json", "searches.json", "connections.json", "media.json", "comments.json", "messages.json", "devices.json"], parse = [True, True, True, True, True, True, True], title = None, show_credits = True, verbose = True, logging = True, **kwargs):
 
     result = 0
     complete_log = ""
@@ -915,6 +959,8 @@ def instaview(filenames = ["profile.json", "searches.json", "connections.json", 
         title = "<h1>INSTAGRAM DATA [" + str(datetime.datetime.today().strftime('%Y-%m-%d'))+ "]</h1>\n"
 
     if parse[5]:
+        if verbose:
+            print("Reading messages...")
         try:
             chat_string, chat_list, status_code, error_log = read_messages(filenames[5], **kwargs)
             complete_log = complete_log + error_log
@@ -935,6 +981,8 @@ def instaview(filenames = ["profile.json", "searches.json", "connections.json", 
     end_html = "\n</div>\n</body>\n</html>"
 
     if parse[0]:
+        if verbose:
+            print("Reading profile...")
         try:
             a, status_code, error_log = read_profile(filenames[0])
             complete_log = complete_log + error_log
@@ -947,6 +995,8 @@ def instaview(filenames = ["profile.json", "searches.json", "connections.json", 
             print(e)
             complete_log = complete_log + "\n\nFATAL ERROR reading profile!\n\n"
     if parse[1]:
+        if verbose:
+            print("Reading searches...")
         try:
             b, status_code, error_log = read_searches(filenames[1])
             complete_log = complete_log + error_log
@@ -959,6 +1009,8 @@ def instaview(filenames = ["profile.json", "searches.json", "connections.json", 
             print(e)
             complete_log = complete_log + "\n\nFATAL ERROR reading searches!\n\n"
     if parse[2]:
+        if verbose:
+            print("Reading connections...")
         try:
             c, status_code, error_log = read_connections(filenames[2])
             complete_log = complete_log + error_log
@@ -971,6 +1023,8 @@ def instaview(filenames = ["profile.json", "searches.json", "connections.json", 
             print(e)
             complete_log = complete_log + "\n\nFATAL ERROR reading connections!\n\n"
     if parse[3]:
+        if verbose:
+            print("Reading media...")
         try:
             d, status_code, error_log = read_media(filenames[3])
             complete_log = complete_log + error_log
@@ -983,6 +1037,8 @@ def instaview(filenames = ["profile.json", "searches.json", "connections.json", 
             print(e)
             complete_log = complete_log + "\n\nFATAL ERROR reading media!\n\n"
     if parse[4]:
+        if verbose:
+            print("Reading comments...")
         try:
             g, status_code, error_log = read_comments(filenames[4])
             complete_log = complete_log + error_log
@@ -994,11 +1050,25 @@ def instaview(filenames = ["profile.json", "searches.json", "connections.json", 
             print("FATAL ERROR reading comments!")
             print(e)
             complete_log = complete_log + "\n\nFATAL ERROR reading comments!\n\n"
+    if parse[6]:
+        if verbose:
+            print("Reading devices...")
+        try:
+            h, status_code, error_log = read_devices(filenames[6])
+            complete_log = complete_log + error_log
+            if status_code != 0:
+                print("ERRORs encountered while reading devices: ", str(status_code))
+        except Exception as e:
+            h = ""
+            result = result + 16
+            print("FATAL ERROR reading devices!")
+            print(e)
+            complete_log = complete_log + "\n\nFATAL ERROR reading devices!\n\n"
 
     if show_credits:
-        complete_html = html_template + sidebar + "<div class=\"main\">\n\n" + title + a + b + c + d + g + chat_string + credits + end_html
+        complete_html = html_template + sidebar + "<div class=\"main\">\n\n" + title + a + b + c + d + g + chat_string + h + credits + end_html
     else:
-        complete_html = html_template + sidebar + "<div class=\"main\">\n\n" + title + a + b + c + d + g + chat_string + end_html
+        complete_html = html_template + sidebar + "<div class=\"main\">\n\n" + title + a + b + c + d + g + chat_string + h + end_html
 
     with open("instaview_report.html", "w", encoding="utf-8") as f:
         f.write(complete_html)

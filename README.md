@@ -109,11 +109,12 @@ instaview()
     - html_string (str): json converted to html.
     - status (int): Amount of encountered errors.
     - error_log (str): Log of all encountered errors.
-- **read_messages(filename = "messages.json", profile = "profile.json", profile_pic = None, default_avatar = None, download_all = False, hd = False, avatars_dict = {}):**  
+- **read_messages(filename = "messages.json", profile = "profile.json", reverse_conversations = False, profile_pic = None, default_avatar = None, download_all = False, hd = False, avatars_dict = {}):**  
   Reads message information from json file and creates separate html files for each chat in new "chat" directory. Links to html pages are returned as concatenated html string together with a list of chat participants.
   - **Args:**
     - filename (str): Path to json with message information. Default: "messages.json".
     - profile (str): Path to json with profile information. Default: "profile.json".
+    - reverse_conversations (bool): Message order in chats. Default: False (Newest to Oldest).
     - profile_pic (str): Path or link to profile picture of your own user. Default: None (will be populated by method itself).
     - default_avatar (str): Path or link to default avatar. Default: None (uses instagram.com/instagram profile picture [\[1\]](#Disclaimer)).
     - download_all (bool): If all media links should be downloaded locally. Warning: This might take a very long time! Default: False.
@@ -124,7 +125,7 @@ instaview()
     - chat_list (list of str): List of chats and their participants.
     - status (int): Amount of encountered errors.
     - error_log (str): Log of all encountered errors.
-- **instaview(filenames = ["profile.json", "searches.json", "connections.json", "media.json", "comments.json", "messages.json"], parse = [True, True, True, True, True, True], title = None, show_credits = True, logging = True, \*\*kwargs):**  
+- **instaview(filenames = ["profile.json", "searches.json", "connections.json", "media.json", "comments.json", "messages.json", "devices.json"], parse = [True, True, True, True, True, True, True], title = None, show_credits = True, verbose = True, logging = True, \*\*kwargs):**  
   Executes all functions and creates an html report including information from all used json files. Returns 0 if everything went correctly.
   - **Args:**
     - filenames (list of str): A list with paths to the specific json files in the following order:
@@ -133,11 +134,13 @@ instaview()
       3. Connection information
       4. Media information
       5. Comment information
-      6. Message information  
+      6. Message information
+      7. Device information
       Default: Default filenames for every function (see above).
-    - parse (list of bool): A list of which json-files should be parsed. Default: [True, True, True, True, True, True] (all are parsed).
+    - parse (list of bool): A list of which json-files should be parsed. Default: [True, True, True, True, True, True, True] (all are parsed).
     - title (valid html as str): What the title of the report should be. Default: None ("INSTAGRAM DATA + [Date]").
     - show_credits (bool): If credits should be added at the bottom of the report. Default: True.
+    - verbose (bool): If progress should be printed to terminal. Default: True.
     - logging (bool): If error logs should be written to file. Default: True.
     - \*\*kwargs: any additional arguments will be passed to "read_messages()" (see above).
   - **Return (int):** 0 if successfully, >0 if unsuccesfull or only partly successful.
