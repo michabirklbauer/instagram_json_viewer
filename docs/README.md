@@ -137,7 +137,7 @@ instaview()
       4. Media information
       5. Comment information
       6. Message information
-      7. Device information
+      7. Device information  
       Default: Default filenames for every function (see above).
     - parse (list of bool): A list of which json-files should be parsed. Default: [True, True, True, True, True, True, True] (all are parsed).
     - title (valid html as str): What the title of the report should be. Default: None ("INSTAGRAM DATA + [Date]").
