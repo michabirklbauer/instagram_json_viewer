@@ -219,7 +219,7 @@ def read_searches(filename = "searches.json"):
     errors = []
 
     # html template
-    html_string = "<h2 id=\"searches\">Profile Searches</h2>\n\t<ul>\n"
+    html_string = "<h2 id=\"searches\">Searches</h2>\n"
 
     # json to html conversion
     try:
@@ -227,8 +227,29 @@ def read_searches(filename = "searches.json"):
             data = json.load(f)
             f.close()
 
+        main_search = data["main_search_history"]
+        shopping_search = data["shopping_search_history"]
+
+        html_string = html_string + "<h3>Profile Searches</h3>\n\t<ul>\n"
+
         counter = 1
-        for item in data:
+        for item in main_search:
+            if item == "You have no data in this section":
+                html_string = html_string + "\t\t<li>You have no data in this section.</li>\n"
+                break
+            html_string = html_string + "\t\t<li><b>Search " + str(counter) + ":</b>\n\t\t\t<ul>\n"
+            for subitem in item:
+                html_string = html_string + "\t\t\t\t<li><b>" + str(subitem) + ":</b> " + str(item[subitem]) + "</li>\n"
+            html_string = html_string + "\t\t\t</ul>\n\t\t</li>\n"
+            counter = counter + 1
+
+        html_string = html_string + "\t</ul>\n<h3>Shopping Searches</h3>\n\t<ul>\n"
+
+        counter = 1
+        for item in shopping_search:
+            if item == "You have no data in this section":
+                html_string = html_string + "\t\t<li>You have no data in this section.</li>\n"
+                break
             html_string = html_string + "\t\t<li><b>Search " + str(counter) + ":</b>\n\t\t\t<ul>\n"
             for subitem in item:
                 html_string = html_string + "\t\t\t\t<li><b>" + str(subitem) + ":</b> " + str(item[subitem]) + "</li>\n"
