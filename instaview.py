@@ -20,128 +20,128 @@ html_template = \
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Instagram Data Report">
-<meta name="author" content="Micha Birklbauer">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Instagram Data Report">
+    <meta name="author" content="Micha Birklbauer">
 
-<title>Instagram Data Report</title>
+    <title>Instagram Data Report</title>
 
-<style>
-body {
-  font-family: "Times New Roman", Times, serif;
-}
+    <style>
+    body {
+      font-family: "Times New Roman", Times, serif;
+    }
 
-.sidenav {
-  height: 100%;
-  width: 160px;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: #fff;
-  overflow-x: hidden;
-  padding-top: 20px;
-}
+    .sidenav {
+      height: 100%;
+      width: 160px;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      background-color: #fff;
+      overflow-x: hidden;
+      padding-top: 20px;
+    }
 
-.sidenav a {
-  padding: 6px 8px 6px 16px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #111;
-  display: block;
-}
+    .sidenav a {
+      padding: 6px 8px 6px 16px;
+      text-decoration: none;
+      font-size: 25px;
+      color: #111;
+      display: block;
+    }
 
-.sidenav a:hover {
-  color: #f1f1f1;
-}
+    .sidenav a:hover {
+      color: #f1f1f1;
+    }
 
-.main {
-  margin-left: 160px;
-  font-size: 25px;
-  padding: 0px 10px;
-}
+    .main {
+      margin-left: 160px;
+      font-size: 25px;
+      padding: 0px 10px;
+    }
 
-.main img {
-  max-width: 500px;
-  width: 100%;
-}
+    .main img {
+      max-width: 500px;
+      width: 100%;
+    }
 
-.main audio {
-  max-width: 500px;
-  width: 100%;
-}
+    .main audio {
+      max-width: 500px;
+      width: 100%;
+    }
 
-.main video {
-  max-width: 500px;
-  width: 100%;
-}
+    .main video {
+      max-width: 500px;
+      width: 100%;
+    }
 
-@media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
-}
+    @media screen and (max-height: 450px) {
+      .sidenav {padding-top: 15px;}
+      .sidenav a {font-size: 18px;}
+    }
 
-.container {
-  border: 2px solid #000;
-  background-color: #ffffff;
-  border-radius: 5px;
-  padding: 10px;
-  margin: 10px 0;
-}
+    .container {
+      border: 2px solid #000;
+      background-color: #ffffff;
+      border-radius: 5px;
+      padding: 10px;
+      margin: 10px 0;
+    }
 
-.darker {
-  border-color: #000;
-  background-color: #66b3ff;
-}
+    .darker {
+      border-color: #000;
+      background-color: #66b3ff;
+    }
 
-.container::after {
-  content: "";
-  clear: both;
-  display: table;
-}
+    .container::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
 
-.container img {
-  max-width: 500px;
-  width: 100%;
-}
+    .container img {
+      max-width: 500px;
+      width: 100%;
+    }
 
-.container img.left {
-  float: left;
-  max-width: 60px;
-  width: 100%;
-  margin-right: 20px;
-  border-radius: 50%;
-}
+    .container img.left {
+      float: left;
+      max-width: 60px;
+      width: 100%;
+      margin-right: 20px;
+      border-radius: 50%;
+    }
 
-.container img.right {
-  float: right;
-  max-width: 60px;
-  width: 100%;
-  margin-left: 20px;
-  border-radius: 50%;
-}
+    .container img.right {
+      float: right;
+      max-width: 60px;
+      width: 100%;
+      margin-left: 20px;
+      border-radius: 50%;
+    }
 
-.container audio {
-  max-width: 500px;
-  width: 100%;
-}
+    .container audio {
+      max-width: 500px;
+      width: 100%;
+    }
 
-.container video {
-  max-width: 500px;
-  width: 100%;
-}
+    .container video {
+      max-width: 500px;
+      width: 100%;
+    }
 
-.time-right {
-  float: right;
-  color: #000;
-}
+    .time-right {
+      float: right;
+      color: #000;
+    }
 
-.time-left {
-  float: left;
-  color: #000;
-}
-</style>
+    .time-left {
+      float: left;
+      color: #000;
+    }
+    </style>
 </head>
 <body>
 
@@ -230,30 +230,30 @@ def read_searches(filename = "searches.json"):
         main_search = data["main_search_history"]
         shopping_search = data["shopping_search_history"]
 
-        html_string = html_string + "<h3>Profile Searches</h3>\n\t<ul>\n"
+        html_string = html_string + "\t<h3>Profile Searches</h3>\n\t\t<ul>\n"
 
         counter = 1
         for item in main_search:
             if item == "You have no data in this section":
-                html_string = html_string + "\t\t<li>You have no data in this section.</li>\n"
+                html_string = html_string + "\t\t\t<li>You have no data in this section.</li>\n"
                 break
-            html_string = html_string + "\t\t<li><b>Search " + str(counter) + ":</b>\n\t\t\t<ul>\n"
+            html_string = html_string + "\t\t\t<li><b>Search " + str(counter) + ":</b>\n\t\t\t\t<ul>\n"
             for subitem in item:
-                html_string = html_string + "\t\t\t\t<li><b>" + str(subitem) + ":</b> " + str(item[subitem]) + "</li>\n"
-            html_string = html_string + "\t\t\t</ul>\n\t\t</li>\n"
+                html_string = html_string + "\t\t\t\t\t<li><b>" + str(subitem) + ":</b> " + str(item[subitem]) + "</li>\n"
+            html_string = html_string + "\t\t\t\t</ul>\n\t\t\t</li>\n"
             counter = counter + 1
 
-        html_string = html_string + "\t</ul>\n<h3>Shopping Searches</h3>\n\t<ul>\n"
+        html_string = html_string + "\t\t</ul>\n\t<h3>Shopping Searches</h3>\n\t\t<ul>\n"
 
         counter = 1
         for item in shopping_search:
             if item == "You have no data in this section":
-                html_string = html_string + "\t\t<li>You have no data in this section.</li>\n"
+                html_string = html_string + "\t\t\t<li>You have no data in this section.</li>\n"
                 break
-            html_string = html_string + "\t\t<li><b>Search " + str(counter) + ":</b>\n\t\t\t<ul>\n"
+            html_string = html_string + "\t\t\t<li><b>Search " + str(counter) + ":</b>\n\t\t\t\t<ul>\n"
             for subitem in item:
-                html_string = html_string + "\t\t\t\t<li><b>" + str(subitem) + ":</b> " + str(item[subitem]) + "</li>\n"
-            html_string = html_string + "\t\t\t</ul>\n\t\t</li>\n"
+                html_string = html_string + "\t\t\t\t\t<li><b>" + str(subitem) + ":</b> " + str(item[subitem]) + "</li>\n"
+            html_string = html_string + "\t\t\t\t</ul>\n\t\t\t</li>\n"
             counter = counter + 1
     except Exception as e:
         print("ERROR reading searches!")
@@ -261,7 +261,7 @@ def read_searches(filename = "searches.json"):
         errors.append(str(e))
         status = status + 1
 
-    html_string = html_string + "\t</ul>\n<hr>\n"
+    html_string = html_string + "\t\t</ul>\n<hr>\n"
 
     # creating an error log for file output
     error_log = "Encountered errors reading searches: " + str(status) + "\nError messages:\n" + str("\n".join(errors)) + "\n\n"
