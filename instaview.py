@@ -734,7 +734,7 @@ def read_comments(filename = "comments.json"):
 # for args refer to README.md
 # there are no input checks, incorrect inputs will lead to crashes!
 # so be careful if you don't want things to go sideways
-def read_messages(filename = "messages.json", profile = "profile.json", reverse_conversations = False, profile_pic = None, default_avatar = None, download_all = False, hd = False, avatars_dict = {}):
+def read_messages(filename = "messages.json", profile = "profile.json", reverse_conversations = False, profile_pic = None, default_avatar = None, download_all = False, hd = False, avatars_dict = {}, http_traceback = False):
 
     # error controls and logging
     status = 0
@@ -800,7 +800,7 @@ def read_messages(filename = "messages.json", profile = "profile.json", reverse_
             pp_pic = pp_pics[-1]
             profile_pic = "../profile/" + str(pp_last) + "/" + str(pp_pic)
         except Exception as e:
-            print(e)
+            print(repr(e))
             print("ERROR fetching profile picture locally!")
             print("Trying to fetch online...")
             errors.append(str(repr(e)))
@@ -822,7 +822,7 @@ def read_messages(filename = "messages.json", profile = "profile.json", reverse_
                     ur.urlretrieve(str(profile_pic_url), file_name)
                     profile_pic = "icons/" + str(profile_pic_url).split("/")[-1].split("?")[0]
             except Exception as e:
-                print(e)
+                print(repr(e))
                 print("ERROR fetching profile picture online!")
                 print("Profile picture set to default avatar!")
                 errors.append(str(repr(e)))
@@ -832,7 +832,7 @@ def read_messages(filename = "messages.json", profile = "profile.json", reverse_
                 profile_pic = default_avatar
 
     # function to fetch avatar for given username
-    def get_avatar(username, profile_pic = profile_pic, default = default_avatar, hd = hd):
+    def get_avatar(username, profile_pic = profile_pic, default = default_avatar, hd = hd, http_traceback = http_traceback):
 
         if str(username) == user_username:
             return profile_pic
@@ -855,8 +855,9 @@ def read_messages(filename = "messages.json", profile = "profile.json", reverse_
                 avatar = default
                 print(("WARNING - error getting avatar for user " + str(username) + "!"))
                 print(repr(e))
-                print("Detailed Traceback:")
-                tb.print_exc()
+                if http_traceback:
+                    print("Detailed Traceback:")
+                    tb.print_exc()
             return avatar
 
     # save media locally if possible
