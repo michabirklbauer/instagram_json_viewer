@@ -6,6 +6,7 @@
 # micha.birklbauer@gmail.com
 
 import urllib.request as ur
+import traceback as tb
 import datetime
 import time
 import json
@@ -200,8 +201,10 @@ def read_profile(filename = "profile.json"):
             html_string = html_string + "\t\t<li><b>" + str(item) + ":</b> " + str(data[item]) + "</li>\n"
     except Exception as e:
         print("ERROR reading profile!")
-        print(e)
-        errors.append(str(e))
+        tb.print_exc()
+        errors.append(str(repr(e)))
+        errors.append("Detailed Traceback:")
+        errors.append(tb.format_exc())
         status = status + 1
 
     html_string = html_string + "\t</ul>\n<hr>\n"
@@ -257,8 +260,10 @@ def read_searches(filename = "searches.json"):
             counter = counter + 1
     except Exception as e:
         print("ERROR reading searches!")
-        print(e)
-        errors.append(str(e))
+        tb.print_exc()
+        errors.append(str(repr(e)))
+        errors.append("Detailed Traceback:")
+        errors.append(tb.format_exc())
         status = status + 1
 
     html_string = html_string + "\t\t</ul>\n<hr>\n"
@@ -297,8 +302,10 @@ def read_connections(filename = "connections.json"):
                     html_string = html_string + "\t\t<li>" + str(item) + " <b>blocked since</b> " + str(blocked_users[item]) + "</li>\n"
         except Exception as e:
             print("ERROR reading blocked_users!")
-            print(e)
-            errors.append(str(e))
+            tb.print_exc()
+            errors.append(str(repr(e)))
+            errors.append("Detailed Traceback:")
+            errors.append(tb.format_exc())
             status = status + 1
 
         # restriced users
@@ -314,8 +321,10 @@ def read_connections(filename = "connections.json"):
                     html_string = html_string + "\t\t<li>" + str(item) + " <b>restricted since</b> " + str(restricted_users[item]) + "</li>\n"
         except Exception as e:
             print("ERROR reading restricted_users!")
-            print(e)
-            errors.append(str(e))
+            tb.print_exc()
+            errors.append(str(repr(e)))
+            errors.append("Detailed Traceback:")
+            errors.append(tb.format_exc())
             status = status + 1
 
         # follow requests sent
@@ -331,8 +340,10 @@ def read_connections(filename = "connections.json"):
                     html_string = html_string + "\t\t<li>" + str(item) + " <b>request sent</b> " + str(follow_requests_sent[item]) + "</li>\n"
         except Exception as e:
             print("ERROR reading follow_requests_sent!")
-            print(e)
-            errors.append(str(e))
+            tb.print_exc()
+            errors.append(str(repr(e)))
+            errors.append("Detailed Traceback:")
+            errors.append(tb.format_exc())
             status = status + 1
 
         # following
@@ -348,8 +359,10 @@ def read_connections(filename = "connections.json"):
                     html_string = html_string + "\t\t<li>" + str(item) + " <b>followed since</b> " + str(following[item]) + "</li>\n"
         except Exception as e:
             print("ERROR reading following!")
-            print(e)
-            errors.append(str(e))
+            tb.print_exc()
+            errors.append(str(repr(e)))
+            errors.append("Detailed Traceback:")
+            errors.append(tb.format_exc())
             status = status + 1
 
         # followers
@@ -365,8 +378,10 @@ def read_connections(filename = "connections.json"):
                     html_string = html_string + "\t\t<li>" + str(item) + " <b>has followed since</b> " + str(followers[item]) + "</li>\n"
         except Exception as e:
             print("ERROR reading followers!")
-            print(e)
-            errors.append(str(e))
+            tb.print_exc()
+            errors.append(str(repr(e)))
+            errors.append("Detailed Traceback:")
+            errors.append(tb.format_exc())
             status = status + 1
 
         # following hashtags
@@ -382,8 +397,10 @@ def read_connections(filename = "connections.json"):
                     html_string = html_string + "\t\t<li>" + str(item) + " <b>followed since</b> " + str(following_hashtags[item]) + "</li>\n"
         except Exception as e:
             print("ERROR reading following_hashtags!")
-            print(e)
-            errors.append(str(e))
+            tb.print_exc()
+            errors.append(str(repr(e)))
+            errors.append("Detailed Traceback:")
+            errors.append(tb.format_exc())
             status = status + 1
 
         # dismissed suggested users
@@ -399,13 +416,17 @@ def read_connections(filename = "connections.json"):
                     html_string = html_string + "\t\t<li>" + str(item) + " <b>dismissed on</b> " + str(dismissed_suggested_users[item]) + "</li>\n"
         except Exception as e:
             print("ERROR reading dismissed_suggested_users!")
-            print(e)
-            errors.append(str(e))
+            tb.print_exc()
+            errors.append(str(repr(e)))
+            errors.append("Detailed Traceback:")
+            errors.append(tb.format_exc())
             status = status + 1
     except Exception as e:
         print("ERROR reading connections!")
-        print(e)
-        errors.append(str(e))
+        tb.print_exc()
+        errors.append(str(repr(e)))
+        errors.append("Detailed Traceback:")
+        errors.append(tb.format_exc())
         status = status + 1000
 
     html_string = html_string + "\t</ul>\n<hr>\n"
@@ -460,8 +481,10 @@ def read_media(filename = "media.json"):
                     html_string = html_string + "\t\t</li>\n"
         except Exception as e:
             print("ERROR reading stories media!")
-            print(e)
-            errors.append(str(e))
+            tb.print_exc()
+            errors.append(str(repr(e)))
+            errors.append("Detailed Traceback:")
+            errors.append(tb.format_exc())
             status = status + 1
 
         # photos
@@ -487,8 +510,10 @@ def read_media(filename = "media.json"):
                     html_string = html_string + "\t\t</li>\n"
         except Exception as e:
             print("ERROR reading photos media!")
-            print(e)
-            errors.append(str(e))
+            tb.print_exc()
+            errors.append(str(repr(e)))
+            errors.append("Detailed Traceback:")
+            errors.append(tb.format_exc())
             status = status + 1
 
         # profile
@@ -514,8 +539,10 @@ def read_media(filename = "media.json"):
                     html_string = html_string + "\t\t</li>\n"
         except Exception as e:
             print("ERROR reading profile media!")
-            print(e)
-            errors.append(str(e))
+            tb.print_exc()
+            errors.append(str(repr(e)))
+            errors.append("Detailed Traceback:")
+            errors.append(tb.format_exc())
             status = status + 1
 
         # videos
@@ -544,8 +571,10 @@ def read_media(filename = "media.json"):
                     html_string = html_string + "\t\t</li>\n"
         except Exception as e:
             print("ERROR reading video media!")
-            print(e)
-            errors.append(str(e))
+            tb.print_exc()
+            errors.append(str(repr(e)))
+            errors.append("Detailed Traceback:")
+            errors.append(tb.format_exc())
             status = status + 1
 
         # direct
@@ -576,13 +605,17 @@ def read_media(filename = "media.json"):
                     html_string = html_string + "\t\t</li>\n"
         except Exception as e:
             print("ERROR reading direct media!")
-            print(e)
-            errors.append(str(e))
+            tb.print_exc()
+            errors.append(str(repr(e)))
+            errors.append("Detailed Traceback:")
+            errors.append(tb.format_exc())
             status = status + 1
     except Exception as e:
         print("ERROR reading media!")
-        print(e)
-        errors.append(str(e))
+        tb.print_exc()
+        errors.append(str(repr(e)))
+        errors.append("Detailed Traceback:")
+        errors.append(tb.format_exc())
         status = status + 1000
 
     html_string = html_string + "\t</ul>\n<hr>\n"
@@ -623,8 +656,10 @@ def read_comments(filename = "comments.json"):
                     html_string = html_string + "\t\t</li>\n"
         except Exception as e:
             print("ERROR reading media comments!")
-            print(e)
-            errors.append(str(e))
+            tb.print_exc()
+            errors.append(str(repr(e)))
+            errors.append("Detailed Traceback:")
+            errors.append(tb.format_exc())
             status = status + 1
 
         # live comments
@@ -647,8 +682,10 @@ def read_comments(filename = "comments.json"):
                 pass
         except Exception as e:
             print("ERROR reading live comments!")
-            print(e)
-            errors.append(str(e))
+            tb.print_exc()
+            errors.append(str(repr(e)))
+            errors.append("Detailed Traceback:")
+            errors.append(tb.format_exc())
             status = status + 1
 
         # story comments
@@ -667,17 +704,21 @@ def read_comments(filename = "comments.json"):
                         html_string = html_string + "\t\t\t<b>Story Owner:</b> " + str(item[2]) + "<br>\n\t\t\t<b>Commented on:</b> " + str(item[0]) + "<br>\n\t\t\t<b>Comment:</b> " + str(item[1]) + "\n"
                         html_string = html_string + "\t\t</li>\n"
             except Exception as e:
-                print(e)
+                print(repr(e))
                 pass
         except Exception as e:
             print("ERROR reading story comments!")
-            print(e)
-            errors.append(str(e))
+            tb.print_exc()
+            errors.append(str(repr(e)))
+            errors.append("Detailed Traceback:")
+            errors.append(tb.format_exc())
             status = status + 1
     except Exception as e:
         print("ERROR reading comments!")
-        print(e)
-        errors.append(str(e))
+        tb.print_exc()
+        errors.append(str(repr(e)))
+        errors.append("Detailed Traceback:")
+        errors.append(tb.format_exc())
         status = status + 1000
 
     html_string = html_string + "\t</ul>\n<hr>\n"
@@ -706,14 +747,18 @@ def read_messages(filename = "messages.json", profile = "profile.json", reverse_
         os.mkdir("chat")
     except Exception as e:
         print("ERROR creating directory 'chat'!")
-        print(e)
+        print(repr(e))
+        print("Detailed Traceback:")
+        tb.print_exc()
 
     # creating icons directory
     try:
         os.mkdir("chat/icons")
     except Exception as e:
         print("ERROR creating directory 'chat/icons'!")
-        print(e)
+        print(repr(e))
+        print("Detailed Traceback:")
+        tb.print_exc()
 
     # creating media directory if media is downloaded
     if download_all:
@@ -721,7 +766,9 @@ def read_messages(filename = "messages.json", profile = "profile.json", reverse_
             os.mkdir("chat/media")
         except Exception as e:
             print("ERROR creating directory 'chat/icons'!")
-            print(e)
+            print(repr(e))
+            print("Detailed Traceback:")
+            tb.print_exc()
 
     chat_list = []
 
@@ -756,7 +803,9 @@ def read_messages(filename = "messages.json", profile = "profile.json", reverse_
             print(e)
             print("ERROR fetching profile picture locally!")
             print("Trying to fetch online...")
-            errors.append(str(e))
+            errors.append(str(repr(e)))
+            errors.append("Detailed Traceback:")
+            errors.append(tb.format_exc())
             status = status + 1
             try:
                 ig_url = "https://instagram.com/" + user_username + "/?__a=1"
@@ -776,7 +825,9 @@ def read_messages(filename = "messages.json", profile = "profile.json", reverse_
                 print(e)
                 print("ERROR fetching profile picture online!")
                 print("Profile picture set to default avatar!")
-                errors.append(str(e))
+                errors.append(str(repr(e)))
+                errors.append("Detailed Traceback:")
+                errors.append(tb.format_exc())
                 status = status + 1
                 profile_pic = default_avatar
 
@@ -803,7 +854,9 @@ def read_messages(filename = "messages.json", profile = "profile.json", reverse_
             except Exception as e:
                 avatar = default
                 print(("WARNING - error getting avatar for user " + str(username) + "!"))
-                print(e)
+                print(repr(e))
+                print("Detailed Traceback:")
+                tb.print_exc()
             return avatar
 
     # save media locally if possible
@@ -915,9 +968,11 @@ def read_messages(filename = "messages.json", profile = "profile.json", reverse_
         except Exception as e:
             print("ERROR reading messages!")
             print("Affected conversion: ", str(", ".join(participants)))
-            print(e)
+            tb.print_exc()
+            errors.append(str(repr(e)))
+            errors.append("Detailed Traceback:")
+            errors.append(tb.format_exc())
             status = status + 1
-            errors.append(str(e))
             conv_errors.append(str(", ".join(participants)))
 
     html_string = html_string + "</ul>\n"
@@ -955,8 +1010,10 @@ def read_devices(filename = "devices.json"):
             html_string = html_string + "\t\t\t</ul>\n"
     except Exception as e:
         print("ERROR reading devices!")
-        print(e)
-        errors.append(str(e))
+        tb.print_exc()
+        errors.append(str(repr(e)))
+        errors.append("Detailed Traceback:")
+        errors.append(tb.format_exc())
         status = status + 1
 
     html_string = html_string + "\t</ul>\n<hr>\n"
@@ -991,8 +1048,8 @@ def instaview(filenames = ["profile.json", "searches.json", "connections.json", 
             chat_string, chat_list = ["", []]
             result = result + 32
             print("FATAL ERROR reading messages!")
-            print(e)
-            complete_log = complete_log + "\n\nFATAL ERROR reading messages!\n\n"
+            tb.print_exc()
+            complete_log = complete_log + "\n\nFATAL ERROR reading messages!\n" + tb.format_exc() + "\n\n"
 
     if show_credits:
         sidebar = sidebar_template + "\t<a href=\"#credits\">Credits</a>\n</div>\n"
@@ -1013,8 +1070,8 @@ def instaview(filenames = ["profile.json", "searches.json", "connections.json", 
             a = ""
             result = result + 1
             print("FATAL ERROR reading profile!")
-            print(e)
-            complete_log = complete_log + "\n\nFATAL ERROR reading profile!\n\n"
+            tb.print_exc()
+            complete_log = complete_log + "\n\nFATAL ERROR reading profile!\n" + tb.format_exc() + "\n\n"
     if parse[1]:
         if verbose:
             print("Reading searches...")
@@ -1027,8 +1084,8 @@ def instaview(filenames = ["profile.json", "searches.json", "connections.json", 
             b = ""
             result = result + 2
             print("FATAL ERROR reading searches!")
-            print(e)
-            complete_log = complete_log + "\n\nFATAL ERROR reading searches!\n\n"
+            tb.print_exc()
+            complete_log = complete_log + "\n\nFATAL ERROR reading searches!\n" + tb.format_exc() + "\n\n"
     if parse[2]:
         if verbose:
             print("Reading connections...")
@@ -1041,8 +1098,8 @@ def instaview(filenames = ["profile.json", "searches.json", "connections.json", 
             c = ""
             result = result + 4
             print("FATAL ERROR reading connections!")
-            print(e)
-            complete_log = complete_log + "\n\nFATAL ERROR reading connections!\n\n"
+            tb.print_exc()
+            complete_log = complete_log + "\n\nFATAL ERROR reading connections!\n" + tb.format_exc() + "\n\n"
     if parse[3]:
         if verbose:
             print("Reading media...")
@@ -1055,8 +1112,8 @@ def instaview(filenames = ["profile.json", "searches.json", "connections.json", 
             d = ""
             result = result + 8
             print("FATAL ERROR reading media!")
-            print(e)
-            complete_log = complete_log + "\n\nFATAL ERROR reading media!\n\n"
+            tb.print_exc()
+            complete_log = complete_log + "\n\nFATAL ERROR reading media!\n" + tb.format_exc() + "\n\n"
     if parse[4]:
         if verbose:
             print("Reading comments...")
@@ -1069,8 +1126,8 @@ def instaview(filenames = ["profile.json", "searches.json", "connections.json", 
             g = ""
             result = result + 16
             print("FATAL ERROR reading comments!")
-            print(e)
-            complete_log = complete_log + "\n\nFATAL ERROR reading comments!\n\n"
+            tb.print_exc()
+            complete_log = complete_log + "\n\nFATAL ERROR reading comments!\n" + tb.format_exc() + "\n\n"
     if parse[6]:
         if verbose:
             print("Reading devices...")
@@ -1083,8 +1140,8 @@ def instaview(filenames = ["profile.json", "searches.json", "connections.json", 
             h = ""
             result = result + 16
             print("FATAL ERROR reading devices!")
-            print(e)
-            complete_log = complete_log + "\n\nFATAL ERROR reading devices!\n\n"
+            tb.print_exc()
+            complete_log = complete_log + "\n\nFATAL ERROR reading devices!\n" + tb.format_exc() + "\n\n"
 
     if show_credits:
         complete_html = html_template + sidebar + "<div class=\"main\">\n\n" + title + a + b + c + d + g + chat_string + h + credits + end_html
@@ -1110,4 +1167,4 @@ if __name__ == '__main__':
         print(res)
     except Exception as e:
         print("ERROR! Is script in right directory?")
-        print(e)
+        tb.print_exc()
