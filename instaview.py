@@ -843,17 +843,24 @@ def read_messages(filename = "messages.json", profile = "profile.json", reverse_
                 json_data = json.loads(data)
                 if hd:
                     avatar_url = str(json_data["graphql"]["user"]["profile_pic_url_hd"])
-                    file_name = "chat/icons/" + str(avatar_url).split("/")[-1].split("?")[0]
+                    file_name = "chat/icons/" + str(username)
                     ur.urlretrieve(str(avatar_url), file_name)
-                    avatar = "icons/" + str(avatar_url).split("/")[-1].split("?")[0]
+                    avatar = "icons/" + str(username)
                 else:
                     avatar_url = str(json_data["graphql"]["user"]["profile_pic_url"])
-                    file_name = "chat/icons/" + str(avatar_url).split("/")[-1].split("?")[0]
+                    file_name = "chat/icons/" + str(username)
                     ur.urlretrieve(str(avatar_url), file_name)
-                    avatar = "icons/" + str(avatar_url).split("/")[-1].split("?")[0]
+                    avatar = "icons/" + str(username)
             except Exception as e:
-                avatar = default
-                print(("WARNING - error getting avatar for user " + str(username) + "!"))
+                try:
+                    avatar_url = default
+                    file_name = "chat/icons/" + str(username)
+                    ur.urlretrieve(str(avatar_url), file_name)
+                    avatar = "icons/" + str(username)
+                except:
+                    print("INFO: Downloading of default avatar was unsuccessful! Avatar is still set!")
+                    avatar = default
+                print(("WARNING - error getting avatar for user " + str(username) + "!\n Set to default!"))
                 print(repr(e))
                 if http_traceback:
                     print("Detailed Traceback:")
