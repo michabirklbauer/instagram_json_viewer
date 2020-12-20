@@ -1,4 +1,4 @@
-# Instagram JSON Viewer
+# Instagram JSON / Backup Viewer
 
 This script transforms Instagram's data - [that you get via the Data Download Tool](https://www.instagram.com/download/request/) - to a readable format!
 
