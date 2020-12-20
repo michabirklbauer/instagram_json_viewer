@@ -728,6 +728,55 @@ def read_comments(filename = "comments.json"):
 
     return [html_string, status, error_log]
 
+# helper function to generate a messages json file from a directory
+# dirname is the directory that stores the split message_*.json files
+def generate_messages_json(dirname = "messages"):
+
+    if not os.path.isdir(dirname):
+        print("ERROR - Specified directory does not exist", dirname)
+        return 1
+
+    try:
+        messages_json = []
+
+        for dirpath, dirnames, filenames in os.walk(dirname):
+            for fname in filenames:
+                if fname.endswith(".json"):
+                    with open(os.path.join(dirpath, fname), "r", encoding="utf-8") as f:
+                        data = json.load(f)
+                        f.close()
+                    messages_json.append(data)
+
+        filename = dirname + ".json"
+        with open(filename, "w", encoding="utf-8") as f:
+            json.dump(messages_json, f)
+            f.close()
+
+        return 0
+    except Exception as e:
+        print("ERROR creating specified messages JSON file!")
+        print(repr(e))
+        print("Detailed Traceback:")
+        tb.print_exc()
+        return 1
+
+# this is a debug function to reversely generate a messages-folder-like structure
+# for testing purposes
+def reverse_generate_messages_json(filename = "messages.json"):
+    with open(filename, "r", encoding="utf-8") as f:
+        data = json.load(f)
+        f.close()
+
+    for item in data:
+        dirname = "messages/inbox/"+", ".join(item["participants"])
+        print(dirname)
+        try:
+            os.mkdir(dirname)
+        except Exception:
+            tb.print_exc()
+        with open(dirname+"/message_1.json", "w", encoding="utf-8") as f:
+            json.dump(item, f)
+
 # reading message information and converting it to html string (only links)
 # also creates "chat" subdirectory in current directory
 # creates chat html pages in "chat" subdirectory
@@ -735,6 +784,13 @@ def read_comments(filename = "comments.json"):
 # there are no input checks, incorrect inputs will lead to crashes!
 # so be careful if you don't want things to go sideways
 def read_messages(filename = "messages.json", profile = "profile.json", reverse_conversations = False, profile_pic = None, default_avatar = None, download_all = False, hd = False, avatars_dict = {}, http_traceback = False):
+
+    # generate messages.json (or specified messages json file) if not present on
+    # the current file tree
+    if not os.path.isfile(filename):
+        mjson_status = generate_messages_json(filename.split(".")[0])
+        if mjson_status != 0:
+            print("WARNING - Generating", filename, "was unsuccessful! Trying to continue...")
 
     # error controls and logging
     status = 0
@@ -809,7 +865,9 @@ def read_messages(filename = "messages.json", profile = "profile.json", reverse_
             status = status + 1
             try:
                 ig_url = "https://instagram.com/" + user_username + "/?__a=1"
-                data = ur.urlopen(ig_url).read()
+                request_header = { "User-Agent" : "Mozilla/5.0 (Windows NT 6.1; Win64; x64)" }
+                request = ur.Request(ig_url, headers=request_header)
+                data = ur.urlopen(request).read()
                 json_data = json.loads(data)
                 if hd:
                     profile_pic_url = str(json_data["graphql"]["user"]["profile_pic_url_hd"])
@@ -839,24 +897,26 @@ def read_messages(filename = "messages.json", profile = "profile.json", reverse_
         else:
             ig_url = "https://instagram.com/" + username + "/?__a=1"
             try:
-                data = ur.urlopen(ig_url).read()
+                request_header = { "User-Agent" : "Mozilla/5.0 (Windows NT 6.1; Win64; x64)" }
+                request = ur.Request(ig_url, headers=request_header)
+                data = ur.urlopen(request).read()
                 json_data = json.loads(data)
                 if hd:
                     avatar_url = str(json_data["graphql"]["user"]["profile_pic_url_hd"])
-                    file_name = "chat/icons/" + str(username)
+                    file_name = "chat/icons/" + str(username) + ".jpg"
                     ur.urlretrieve(str(avatar_url), file_name)
-                    avatar = "icons/" + str(username)
+                    avatar = "icons/" + str(username) + ".jpg"
                 else:
                     avatar_url = str(json_data["graphql"]["user"]["profile_pic_url"])
-                    file_name = "chat/icons/" + str(username)
+                    file_name = "chat/icons/" + str(username) + ".jpg"
                     ur.urlretrieve(str(avatar_url), file_name)
-                    avatar = "icons/" + str(username)
+                    avatar = "icons/" + str(username) + ".jpg"
             except Exception as e:
                 try:
                     avatar_url = default
-                    file_name = "chat/icons/" + str(username)
+                    file_name = "chat/icons/" + str(username) + ".jpg"
                     ur.urlretrieve(str(avatar_url), file_name)
-                    avatar = "icons/" + str(username)
+                    avatar = "icons/" + str(username) + ".jpg"
                 except:
                     print("INFO: Downloading of default avatar was unsuccessful! Avatar is still set!")
                     avatar = default
