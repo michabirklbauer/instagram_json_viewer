@@ -62,6 +62,10 @@ Tutorial Video: [https://www.youtube.com/watch?v=0CUbTkrK62M](https://www.youtub
 - Alternatively you can run the ["instaview.exe"](https://github.com/t0xic-m/instagram_json_viewer/releases) if you have Windows and do not have python installed (steps are the same).
 - Check "instaview_report.html" in the browser of your choice!
 
+## Manually setting Profile Pictures
+
+If you run into any http errors of kind 429 - meaning the Instagram API denied your request - you can manually set profile pictures in the folder `chat/icons` by creating a \*.jpg file with the name of the corresponding user. The picture should roughly resemble the dimensions of a real Instagram profile picture to ensure the generated html still looks nice!
+
 ## Advanced Usage
 
 ```python
@@ -111,7 +115,7 @@ instaview()
     - html_string (str): json converted to html.
     - status (int): Amount of encountered errors.
     - error_log (str): Log of all encountered errors.
-- **read_messages(filename = "messages.json", profile = "profile.json", reverse_conversations = False, profile_pic = None, default_avatar = None, download_all = False, hd = False, avatars_dict = {}):**  
+- **read_messages(filename = "messages.json", profile = "profile.json", reverse_conversations = False, profile_pic = None, default_avatar = None, download_all = False, hd = False, avatars_dict = {}, http_traceback = False):**  
   Reads message information from json file and creates separate html files for each chat in new "chat" directory. Links to html pages are returned as concatenated html string together with a list of chat participants.
   - **Args:**
     - filename (str): Path to json with message information. Default: "messages.json".
@@ -121,7 +125,8 @@ instaview()
     - default_avatar (str): Path or link to default avatar. Default: None (uses instagram.com/instagram profile picture [\[1\]](#Disclaimer)).
     - download_all (bool): If all media links should be downloaded locally. Warning: This might take a very long time! Default: False.
     - hd (bool): If high definition versions of avatars should be used or not. Default: False.
-    - avatars_dict (dict): A dictionary containing usernames and corresponding paths/links to profile pictures. Argument "profile_pic" overwrites user's avatar even if specified in avatars_dict. Default: empty dict (will be populated by method itself)
+    - avatars_dict (dict): A dictionary containing usernames and corresponding paths/links to profile pictures. Argument "profile_pic" overwrites user's avatar even if specified in avatars_dict. Default: empty dict (will be populated by method itself).
+    - http_traceback (bool): Print the full traceback for http errors or not. Default: False (Traceback will not be printed).
   - **Return (list):**
     - html_string (str): json converted to html (does not actually include chats, chats are written to files immediately).
     - chat_list (list of str): List of chats and their participants.
@@ -167,6 +172,7 @@ instaview()
 
 - I didn't include contacts.json since I didn't sync my contacts and therefore had no data available on that. Furthermore account_history.json, autofill.json, checkout.json, likes.json, saved.json, settings.json and stories_activities.json are also not included because I found the information in there is not really useful (e.g. likes.json/saves.json don't include post information etc.)!
 - If you have huge amounts of chats avatars might not load correctly because instagram blocks your IP after too many requests. This might also happen if you run the script several times consecutively!
+- Reading connections and comments usually yields errors because some fields are missing in newer Instagram backups. They can safely be ignored!
 - Links to pictures/videos/etc. will time out after a few days. This is because instagram's access tokens provided in the json files expire. To save any media locally you can use "instaview(download_all=True)"!
 - This is rather experimental since I only had my own data to test this with, there's no guarantee that this also works with your data!
 
