@@ -1039,15 +1039,15 @@ def read_messages(filename = "messages.json", profile = "profile.json", reverse_
             try:
                 print("Affected conversion: ", str(", ".join(participants)))
                 conv_errors.append(str(", ".join(participants)))
+                tb.print_exc()
+                errors.append(str(repr(e)))
+                errors.append("Detailed Traceback:")
+                errors.append(tb.format_exc())
             except Exception as e:
                 print("WARNING - Error for participants cannot be displayed, participants not in right format!")
                 print("Participants:")
                 print(participants)
                 tb.print_exc()
-            tb.print_exc()
-            errors.append(str(repr(e)))
-            errors.append("Detailed Traceback:")
-            errors.append(tb.format_exc())
             status = status + 1
 
     html_string = html_string + "</ul>\n"
