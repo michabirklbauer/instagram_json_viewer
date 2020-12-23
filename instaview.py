@@ -980,9 +980,21 @@ def read_messages(filename = "messages.json", profile = "profile.json", reverse_
             chat_list.append(participants_new)
 
             if reverse_conversations:
-                conversation = reversed(item["conversation"])
+                if "conversation" in item:
+                    conversation = reversed(item["conversation"])
+                elif "messages" in item:
+                    conversation = reversed(item["messages"])
+                else:
+                    # this should probably throw an exception
+                    pass
             else:
-                conversation = item["conversation"]
+                if "conversation" in item:
+                    conversation = item["conversation"]
+                elif "messages" in item:
+                    conversation = item["messages"]
+                else:
+                    # this should probably throw an exception
+                    pass
 
             html_chat_string = "<h3 id=\"" + str("".join(participants_new)) + "\">" + str(", ".join(participants_new)) + "</h3>\n\n"
 
