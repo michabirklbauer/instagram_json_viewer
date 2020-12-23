@@ -5,6 +5,7 @@
 # https://github.com/t0xic-m/
 # micha.birklbauer@gmail.com
 
+from datetime import datetime
 import urllib.request as ur
 import traceback as tb
 import datetime
@@ -951,30 +952,59 @@ def read_messages(filename = "messages.json", profile = "profile.json", reverse_
     for item in data:
         participants = item["participants"]
 
+        # helper list for new json structure - NEW ^= Refers to Instagram Data post ~20th December 2020
+        participants_new = []
+
         try:
             # getting avatars might not work if u send to many requests to instagram
             # if avatars are not shown correctly in chat, run script again at a different time
             # or change IP address if u can
-            for participant in participants:
-                if participant not in avatars:
-                    avatars[participant] = str(get_avatar(participant))
 
-            chat_list.append(participants)
+            for participant in participants:
+
+                # checks for old json structure
+                if isinstance(participant, str):
+                    participants_new.append(participant)
+                    if participant not in avatars:
+                        avatars[participant] = str(get_avatar(participant))
+                # checks for new json structure
+                elif isinstance(participant, dict):
+                    participant = participant["name"]
+                    participants_new.append(participant)
+                    if participant not in avatars:
+                        avatars[participant] = str(get_avatar(participant))
+                else:
+                    # this should probably throw an exception
+                    participants_new = ["ERROR ", "reading participants!"]
+
+            chat_list.append(participants_new)
 
             if reverse_conversations:
                 conversation = reversed(item["conversation"])
             else:
                 conversation = item["conversation"]
 
-            html_chat_string = "<h3 id=\"" + str("".join(participants)) + "\">" + str(", ".join(participants)) + "</h3>\n\n"
+            html_chat_string = "<h3 id=\"" + str("".join(participants_new)) + "\">" + str(", ".join(participants_new)) + "</h3>\n\n"
 
             for message in conversation:
-                if message["sender"] == user_username:
-                    html_chat_string = html_chat_string + "<div class=\"container darker\">\n"
-                    html_chat_string = html_chat_string + "\t<img src=\"" + str(avatars[message["sender"]]) + "\" alt=\"" + str(message["sender"]).upper() + "\" class=\"right\" style=\"width:100%;\">\n"
+
+                if "sender" in message:
+                    if message["sender"] == user_username:
+                        html_chat_string = html_chat_string + "<div class=\"container darker\">\n"
+                        html_chat_string = html_chat_string + "\t<img src=\"" + str(avatars[message["sender"]]) + "\" alt=\"" + str(message["sender"]).upper() + "\" class=\"right\" style=\"width:100%;\">\n"
+                    else:
+                        html_chat_string = html_chat_string + "<div class=\"container\">\n"
+                        html_chat_string = html_chat_string + "\t<img src=\"" + str(avatars[message["sender"]]) + "\" alt=\"" + str(message["sender"]).upper() + "\" class=\"left\" style=\"width:100%;\">\n"
+                elif "sender_name" in message:
+                    if message["sender_name"] == user_username:
+                        html_chat_string = html_chat_string + "<div class=\"container darker\">\n"
+                        html_chat_string = html_chat_string + "\t<img src=\"" + str(avatars[message["sender_name"]]) + "\" alt=\"" + str(message["sender_name"]).upper() + "\" class=\"right\" style=\"width:100%;\">\n"
+                    else:
+                        html_chat_string = html_chat_string + "<div class=\"container\">\n"
+                        html_chat_string = html_chat_string + "\t<img src=\"" + str(avatars[message["sender_name"]]) + "\" alt=\"" + str(message["sender_name"]).upper() + "\" class=\"left\" style=\"width:100%;\">\n"
                 else:
-                    html_chat_string = html_chat_string + "<div class=\"container\">\n"
-                    html_chat_string = html_chat_string + "\t<img src=\"" + str(avatars[message["sender"]]) + "\" alt=\"" + str(message["sender"]).upper() + "\" class=\"left\" style=\"width:100%;\">\n"
+                    # this should probably throw an exception
+                    pass
 
                 if "media_share_url" in message:
                     content = "\t<p>\n\t\t<img src=\"" + get_media(message["media_share_url"]) + "\"IMAGE\">\n\t\t<br>\n\t\t<b>Media Owner:</b> " + str(message["media_owner"]) + "<br>\n"
@@ -1014,6 +1044,9 @@ def read_messages(filename = "messages.json", profile = "profile.json", reverse_
                     if "text" in message:
                         content = content + "\t\t<br><b>Text:</b> " + str(message["text"]) + "\n"
                     html_chat_string = html_chat_string + content + "\t</p>\n"
+                elif "content" in message:
+                    content = "\t<p>\n\t\t<b>Content:</b> " + str(message["content"]) + "\n"
+                    html_chat_string = html_chat_string + content + "\t</p>\n"
                 else:
                     if "text" in message:
                         content = "\t<p>\n\t\t<b>Text:</b> " + str(message["text"]) + "\n"
@@ -1021,10 +1054,43 @@ def read_messages(filename = "messages.json", profile = "profile.json", reverse_
                         content = "\t<p>\n"
                     html_chat_string = html_chat_string + content + "\t</p>\n"
 
-                if message["sender"] == user_username:
-                    html_chat_string = html_chat_string + "\t<span class=\"time-left\">" + str(message["created_at"]) + "</span>\n</div>\n\n"
+                if "sender" in message:
+                    if message["sender"] == user_username:
+                        if "created_at" in message:
+                            html_chat_string = html_chat_string + "\t<span class=\"time-left\">" + str(message["created_at"]) + "</span>\n</div>\n\n"
+                        elif "timestamp_ms" in message:
+                            html_chat_string = html_chat_string + "\t<span class=\"time-left\">" + str(datetime.fromtimestamp(int(message["timestamp_ms"])/1000)) + "</span>\n</div>\n\n"
+                        else:
+                            # throw warning?
+                            html_chat_string = html_chat_string + "\t<span class=\"time-left\"> Time could not be extracted. </span>\n</div>\n\n"
+                    else:
+                        if "created_at" in message:
+                            html_chat_string = html_chat_string + "\t<span class=\"time-right\">" + str(message["created_at"]) + "</span>\n</div>\n\n"
+                        elif "timestamp_ms" in message:
+                            html_chat_string = html_chat_string + "\t<span class=\"time-right\">" + str(datetime.fromtimestamp(int(message["timestamp_ms"])/1000)) + "</span>\n</div>\n\n"
+                        else:
+                            # throw warning?
+                            html_chat_string = html_chat_string + "\t<span class=\"time-right\"> Time could not be extracted. </span>\n</div>\n\n"
+                elif "sender_name" in message:
+                    if message["sender_name"] == user_username:
+                        if "created_at" in message:
+                            html_chat_string = html_chat_string + "\t<span class=\"time-left\">" + str(message["created_at"]) + "</span>\n</div>\n\n"
+                        elif "timestamp_ms" in message:
+                            html_chat_string = html_chat_string + "\t<span class=\"time-left\">" + str(datetime.fromtimestamp(int(message["timestamp_ms"])/1000)) + "</span>\n</div>\n\n"
+                        else:
+                            # throw warning?
+                            html_chat_string = html_chat_string + "\t<span class=\"time-left\"> Time could not be extracted. </span>\n</div>\n\n"
+                    else:
+                        if "created_at" in message:
+                            html_chat_string = html_chat_string + "\t<span class=\"time-right\">" + str(message["created_at"]) + "</span>\n</div>\n\n"
+                        elif "timestamp_ms" in message:
+                            html_chat_string = html_chat_string + "\t<span class=\"time-right\">" + str(datetime.fromtimestamp(int(message["timestamp_ms"])/1000)) + "</span>\n</div>\n\n"
+                        else:
+                            # throw warning?
+                            html_chat_string = html_chat_string + "\t<span class=\"time-right\"> Time could not be extracted. </span>\n</div>\n\n"
                 else:
-                    html_chat_string = html_chat_string + "\t<span class=\"time-right\">" + str(message["created_at"]) + "</span>\n</div>\n\n"
+                    # this should probably throw an exception
+                    pass
 
             html_chat_string = html_chat_string + "<hr>\n"
             ext_filename = "chat/" + str(len(chat_list)) + ".html"
@@ -1032,22 +1098,15 @@ def read_messages(filename = "messages.json", profile = "profile.json", reverse_
                 content = html_template + "<h2 id=\"messages\">Messages</h2>\n\n" + html_chat_string + "</body></html>"
                 f.write(content)
                 f.close()
-            html_string = html_string + "<li><a href=\"" + str(ext_filename) + "\" target=\"_blank\">" + str(", ".join(participants)) + "</a></li>\n"
+            html_string = html_string + "<li><a href=\"" + str(ext_filename) + "\" target=\"_blank\">" + str(", ".join(participants_new)) + "</a></li>\n"
         except Exception as e:
             print("ERROR reading messages!")
-            # this prevents the script from crashing when participants is not an appropriate list
-            try:
-                print("Affected conversion: ", str(", ".join(participants)))
-                conv_errors.append(str(", ".join(participants)))
-                tb.print_exc()
-                errors.append(str(repr(e)))
-                errors.append("Detailed Traceback:")
-                errors.append(tb.format_exc())
-            except Exception as e:
-                print("WARNING - Error for participants cannot be displayed, participants not in right format!")
-                print("Participants:")
-                print(participants)
-                tb.print_exc()
+            print("Affected conversion: ", str(", ".join(participants_new)))
+            conv_errors.append(str(", ".join(participants_new)))
+            errors.append(str(repr(e)))
+            errors.append("Detailed Traceback:")
+            errors.append(tb.format_exc())
+            tb.print_exc()
             status = status + 1
 
     html_string = html_string + "</ul>\n"
