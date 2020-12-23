@@ -2,6 +2,15 @@
 
 This script transforms Instagram's data - [that you get via the Data Download Tool](https://www.instagram.com/download/request/) - to a readable format!
 
+## Important information
+
+Recently [as of 23. Dec 2020] Instagram has changed the structure and key names of several json files while continously also serving some users the old format. Currently this script
+*should* support all versions, however since Instagram doesn't document these changes I cannot ensure that this script still works for everyone. Especially if you still get the older
+backup version that still has the `messages.json` file it is probably safer to use the older release found here [v2020.12.07](https://github.com/t0xic-m/instagram_json_viewer/tree/v2020.12.07) or you can directly download it [here](https://github.com/t0xic-m/instagram_json_viewer/archive/v2020.12.07.zip).
+
+As for the newer backups that don't have the `messages.json` file any input on new keys and structure of the new json files is highly appreciated. The current release might or might not work for newer
+backups, be sure to open an issue if you run into problems!
+
 ## Screenshots
 
 ![HTML1](docs/screenshot1.jpg)
