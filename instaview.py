@@ -1119,21 +1119,21 @@ def read_messages(filename = "messages.json", profile = "profile.json", reverse_
                                     content = content + "\t\t\t<li><b>Share:</b> Share information not available!</li>\n"
                                 content = content + "\t\t</ul>\n"
                             if "content" in message:
-                                content = content + "\t\t<b>Content:</b> " + str(message["content"]).encode("ISO-8859-1").decode("utf-8") + "\n"
+                                content = content + "\t\t<b>Content (share):</b> " + str(message["content"]).encode("ISO-8859-1").decode("utf-8") + "\n"
                             if "share" not in message and "content" not in message:
                                 content = content + "\t\t<b>Share:</b> Share not available!\n"
                             html_chat_string = html_chat_string + content + "\t</p>\n"
                         else:
                             print("INFO - Unknown content type detected: ", message["type"])
-                            content = "\t<p>\n\t\t<b>Content:</b> Content not available!\n"
+                            content = "\t<p>\n\t\t<b>Content (unknown type):</b> Content not available!\n"
                             html_chat_string = html_chat_string + content + "\t</p>\n"
                     else:
                         print("INFO - No content type detected.")
                         if "content" in message:
-                            content = "\t<p>\n\t\t<b>Content:</b> " + str(message["content"]).encode("ISO-8859-1").decode("utf-8") + "\n"
+                            content = "\t<p>\n\t\t<b>Content (undetected type):</b> " + str(message["content"]).encode("ISO-8859-1").decode("utf-8") + "\n"
                             html_chat_string = html_chat_string + content + "\t</p>\n"
                         else:
-                            content = "\t<p>\n\t\t<b>Content:</b> Content not available!\n"
+                            content = "\t<p>\n\t\t<b>Content (undetected type):</b> Content not available!\n"
                             html_chat_string = html_chat_string + content + "\t</p>\n"
                 else:
                     # this should probably throw an exception
