@@ -1202,7 +1202,7 @@ def read_messages(filename = "messages.json", profile = "profile.json", reverse_
     html_string = html_string + "</ul>\n"
 
     # creating an error log for file output
-    error_log = "Encountered errors reading media: " + str(status) + "\n\nAffected conversations:\n" + str("\n".join(conv_errors)) + "\n\nError messages:\n" + str("\n".join(errors)) + "\n\n"
+    error_log = "Encountered errors reading messages: " + str(status) + "\n\nAffected conversations:\n" + str("\n".join(conv_errors)) + "\n\nError messages:\n" + str("\n".join(errors)) + "\n\n"
 
     return [html_string, chat_list, status, error_log]
 
