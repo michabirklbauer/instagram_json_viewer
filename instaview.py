@@ -1111,6 +1111,8 @@ def read_messages(filename = "messages.json", profile = "profile.json", reverse_
                                 content = content + "\t\t<ul>\n"
                                 if "link" in share:
                                     content = content + "\t\t\t<li><b>Link: </b><a href=\"" + str(share["link"]) + "\" target=\"_blank\">" + str(share["link"]) + "</a></li>\n"
+                                else:
+                                    content = content + "\t\t\t<li><b>Link: </b>Link unavailable.</li>\n"
                                 if "share_text" in share:
                                     content = content + "\t\t\t<li><b>Share Text:</b> " + str(share["share_text"]).encode("ISO-8859-1").decode("utf-8") + "</li>\n"
                                 if "original_content_owner" in share:
@@ -1119,7 +1121,10 @@ def read_messages(filename = "messages.json", profile = "profile.json", reverse_
                                     content = content + "\t\t\t<li><b>Share:</b> Share information not available!</li>\n"
                                 content = content + "\t\t</ul>\n"
                             if "content" in message:
-                                content = content + "\t\t<b>Content (share):</b> " + str(message["content"]).encode("ISO-8859-1").decode("utf-8") + "\n"
+                                content = content + "\t\t<ul>\n"
+                                content = content + "\t\t\t<li><b>Link: </b>Link unavailable.</li>\n"
+                                content = content + "\t\t\t<li><b>Content (share):</b> " + str(message["content"]).encode("ISO-8859-1").decode("utf-8") + "</li>\n"
+                                content = content + "\t\t</ul>\n"
                             if "share" not in message and "content" not in message:
                                 content = content + "\t\t<b>Share:</b> Share not available!\n"
                             html_chat_string = html_chat_string + content + "\t</p>\n"
