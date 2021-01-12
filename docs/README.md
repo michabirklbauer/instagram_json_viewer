@@ -2,7 +2,7 @@
 
 This script transforms Instagram's data - [that you get via the Data Download Tool](https://www.instagram.com/download/request/) - to a readable format!
 
-## Important information
+## Important Information
 
 Recently [as of 23. Dec 2020] Instagram has changed the structure and key names of several json files while continously also serving some users the old format. Currently this script
 *should* support all versions, however since Instagram doesn't document these changes I cannot ensure that this script still works for everyone. Especially if you still get the older
@@ -131,7 +131,7 @@ instaview()
 - **read_messages(filename = "messages.json", profile = "profile.json", reverse_conversations = False, profile_pic = None, default_avatar = None, download_all = False, hd = False, avatars_dict = {}, http_traceback = False):**  
   Reads message information from json file and creates separate html files for each chat in new "chat" directory. Links to html pages are returned as concatenated html string together with a list of chat participants.
   - **Args:**
-    - filename (str): Path to json with message information. Default: "messages.json".
+    - filename (str): Path to json with message information or path to folder containing messages. Default: "messages.json".
     - profile (str): Path to json with profile information. Default: "profile.json".
     - reverse_conversations (bool): Message order in chats. Default: False (Newest to Oldest).
     - profile_pic (str): Path or link to profile picture of your own user. Default: None (will be populated by method itself).
@@ -139,6 +139,7 @@ instaview()
     - download_all (bool): If all media links should be downloaded locally. Warning: This might take a very long time! Default: False.
     - hd (bool): If high definition versions of avatars should be used or not. Default: False.
     - avatars_dict (dict): A dictionary containing usernames and corresponding paths/links to profile pictures. Argument "profile_pic" overwrites user's avatar even if specified in avatars_dict. Default: empty dict (will be populated by method itself).
+    - avatar_warnings (bool): Print warnings for getting avatars. Default: False (No warnings are printed).
     - http_traceback (bool): Print the full traceback for http errors or not. Default: False (Traceback will not be printed).
   - **Return (list):**
     - html_string (str): json converted to html (does not actually include chats, chats are written to files immediately).
@@ -172,6 +173,8 @@ instaview()
 - Generates a bar-plot with total amount of messages per conversation!
 - Execute "message_stats.py" and enter your username! Python 3 (or higher) and pandas required!
 - Execute "message_stats.R"! R 3.5 (or higher) and ggplot2 required!
+
+Sidenote: This is currently only available for older instagram backups [pre 23. Dec 2020].
 
 ## Changes to old release
 
