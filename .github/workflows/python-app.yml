@@ -1,5 +1,5 @@
 # This workflow will lint with Python 3.9
-# e.g. check for rsyntax errors and undefined names
+# e.g. check for syntax errors and undefined names
 # Reference workflow provided by (c) GitHub
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
 
