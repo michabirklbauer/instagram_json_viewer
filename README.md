@@ -71,7 +71,7 @@ Tutorial Video: [https://www.youtube.com/watch?v=0CUbTkrK62M](https://www.youtub
 
 ## Manually setting Profile Pictures
 
-If you run into any http errors of kind 429 - meaning the Instagram API denied your request - you can manually set profile pictures in the folder `chat/icons` by creating a \*.jpg file with the name of the corresponding user. The picture should roughly resemble the dimensions of a real Instagram profile picture to ensure the generated html still looks nice!
+If you run into any http errors of kind 429 (not displayed past version v2020.12.23) - meaning the Instagram API denied your request - or simply if your chats all show the default profile picture, you can manually set profile pictures in the folder `chat/icons` by creating a \*.jpg file with the name of the corresponding user. The picture should roughly resemble the dimensions of a real Instagram profile picture to ensure the generated html still looks nice!
 
 ## Advanced Usage
 
