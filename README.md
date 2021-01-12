@@ -1,3 +1,5 @@
+![instaview.py](https://github.com/t0xic-m/instagram_json_viewer/workflows/instaview.py/badge.svg)
+
 # Instagram JSON / Backup Viewer
 
 This script transforms Instagram's data - [that you get via the Data Download Tool](https://www.instagram.com/download/request/) - to a readable format!
