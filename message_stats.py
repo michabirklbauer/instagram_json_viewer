@@ -8,7 +8,7 @@
 import pandas as pd
 import json
 
-# only 1-1 conversations, no groupchats
+# only 1-1 conversations, no groupchats, only old backups [pre. 23. Dec 2020]
 def get_stats(username):
     stats = {}
 

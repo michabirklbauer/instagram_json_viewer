@@ -145,7 +145,6 @@ html_template = \
     </style>
 </head>
 <body>
-
 """
 
 # template sidebar html
@@ -160,14 +159,9 @@ sidebar_template = \
     <a href="#photos">Photos</a>
     <a href="#pictures">Profile Pictures</a>
     <a href="#videos">Videos</a>
-    <a href="#direct">Direct Messages Media</a>
     <a href="#comments">Comments</a>
-    <a href="#mediacomments">Media Comments</a>
-    <a href="#livecomments">Live Comments</a>
-    <a href="#storycomments">Story Comments</a>
     <a href="#messages">Messages</a>
     <a href="#devices">Devices</a>
-
 """
 
 # patting myself on the shoulder for this one uwu
@@ -289,43 +283,45 @@ def read_connections(filename = "connections.json"):
             data = json.load(f)
             f.close()
 
-        # blocked users
-        try:
-            blocked_users = data["blocked_users"]
+        # blocked users - this field is not available in newer backups
+        if "blocked_users" in data:
+            try:
+                blocked_users = data["blocked_users"]
 
-            html_string = html_string + "<h3>Blocked Users</h3>\n\t<ul>\n"
+                html_string = html_string + "<h3>Blocked Users</h3>\n\t<ul>\n"
 
-            if len(blocked_users) == 0:
-                html_string = html_string + "\t\t<li>None</li>\n"
-            else:
-                for item in blocked_users:
-                    html_string = html_string + "\t\t<li>" + str(item) + " <b>blocked since</b> " + str(blocked_users[item]) + "</li>\n"
-        except Exception as e:
-            print("ERROR reading blocked_users!")
-            tb.print_exc()
-            errors.append(str(repr(e)))
-            errors.append("Detailed Traceback:")
-            errors.append(tb.format_exc())
-            status = status + 1
+                if len(blocked_users) == 0:
+                    html_string = html_string + "\t\t<li>None</li>\n"
+                else:
+                    for item in blocked_users:
+                        html_string = html_string + "\t\t<li>" + str(item) + " <b>blocked since</b> " + str(blocked_users[item]) + "</li>\n"
+            except Exception as e:
+                print("ERROR reading blocked_users!")
+                tb.print_exc()
+                errors.append(str(repr(e)))
+                errors.append("Detailed Traceback:")
+                errors.append(tb.format_exc())
+                status = status + 1
 
-        # restriced users
-        try:
-            restricted_users = data["restricted_users"]
+        # restriced users - this field is not available in newer backups
+        if "restricted_users" in data:
+            try:
+                restricted_users = data["restricted_users"]
 
-            html_string = html_string + "\t</ul>\n\n<h3>Restricted Users</h3>\n\t<ul>\n"
+                html_string = html_string + "\t</ul>\n\n<h3>Restricted Users</h3>\n\t<ul>\n"
 
-            if len(restricted_users) == 0:
-                html_string = html_string + "\t\t<li>None</li>\n"
-            else:
-                for item in restricted_users:
-                    html_string = html_string + "\t\t<li>" + str(item) + " <b>restricted since</b> " + str(restricted_users[item]) + "</li>\n"
-        except Exception as e:
-            print("ERROR reading restricted_users!")
-            tb.print_exc()
-            errors.append(str(repr(e)))
-            errors.append("Detailed Traceback:")
-            errors.append(tb.format_exc())
-            status = status + 1
+                if len(restricted_users) == 0:
+                    html_string = html_string + "\t\t<li>None</li>\n"
+                else:
+                    for item in restricted_users:
+                        html_string = html_string + "\t\t<li>" + str(item) + " <b>restricted since</b> " + str(restricted_users[item]) + "</li>\n"
+            except Exception as e:
+                print("ERROR reading restricted_users!")
+                tb.print_exc()
+                errors.append(str(repr(e)))
+                errors.append("Detailed Traceback:")
+                errors.append(tb.format_exc())
+                status = status + 1
 
         # follow requests sent
         try:
@@ -403,24 +399,26 @@ def read_connections(filename = "connections.json"):
             errors.append(tb.format_exc())
             status = status + 1
 
-        # dismissed suggested users
-        try:
-            dismissed_suggested_users = data["dismissed_suggested_users"]
+        # dismissed suggested users  - this field is not available in newer backups
+        if "dismissed_suggested_users" in data:
+            try:
+                dismissed_suggested_users = data["dismissed_suggested_users"]
 
-            html_string = html_string + "\t</ul>\n\n<h3>Dismissed Suggested Users</h3>\n\t<ul>\n"
+                html_string = html_string + "\t</ul>\n\n<h3>Dismissed Suggested Users</h3>\n\t<ul>\n"
 
-            if len(dismissed_suggested_users) == 0:
-                html_string = html_string + "\t\t<li>None</li>\n"
-            else:
-                for item in dismissed_suggested_users:
-                    html_string = html_string + "\t\t<li>" + str(item) + " <b>dismissed on</b> " + str(dismissed_suggested_users[item]) + "</li>\n"
-        except Exception as e:
-            print("ERROR reading dismissed_suggested_users!")
-            tb.print_exc()
-            errors.append(str(repr(e)))
-            errors.append("Detailed Traceback:")
-            errors.append(tb.format_exc())
-            status = status + 1
+                if len(dismissed_suggested_users) == 0:
+                    html_string = html_string + "\t\t<li>None</li>\n"
+                else:
+                    for item in dismissed_suggested_users:
+                        html_string = html_string + "\t\t<li>" + str(item) + " <b>dismissed on</b> " + str(dismissed_suggested_users[item]) + "</li>\n"
+            except Exception as e:
+                print("ERROR reading dismissed_suggested_users!")
+                tb.print_exc()
+                errors.append(str(repr(e)))
+                errors.append("Detailed Traceback:")
+                errors.append(tb.format_exc())
+                status = status + 1
+
     except Exception as e:
         print("ERROR reading connections!")
         tb.print_exc()
@@ -577,39 +575,41 @@ def read_media(filename = "media.json"):
             errors.append(tb.format_exc())
             status = status + 1
 
-        # direct
-        try:
-            direct = data["direct"]
+        # direct - this field is not available in newer backups
+        if "direct" in data:
+            try:
+                direct = data["direct"]
 
-            html_string = html_string + "\t</ul>\n\n<h3 id=\"direct\">Direct Messages Media</h3>\n\t<ul>\n"
+                html_string = html_string + "\t</ul>\n\n<h3 id=\"direct\">Direct Messages Media</h3>\n\t<ul>\n"
 
-            if len(direct) == 0:
-                html_string = html_string + "\t\t<li>None</li>\n"
-            else:
-                for item in direct:
-                    html_string = html_string + "\t\t<li>\n"
+                if len(direct) == 0:
+                    html_string = html_string + "\t\t<li>None</li>\n"
+                else:
+                    for item in direct:
+                        html_string = html_string + "\t\t<li>\n"
 
-                    html_string = html_string + "\t\t\t<b>Taken at:</b> " + str(item["taken_at"]) + "<br>\n"
+                        html_string = html_string + "\t\t\t<b>Taken at:</b> " + str(item["taken_at"]) + "<br>\n"
 
-                    if str(item["path"]).split(".")[-1] == "mp4":
-                        html_string = html_string + "\t\t\t<video controls>\n"
-                        html_string = html_string + "\t\t\t\t<source src=\"" + str(item["path"]) + "\" type=\"video/mp4\">\n"
-                        html_string = html_string + "\t\t\t</video>\n"
-                    elif str(item["path"]).split(".")[-1] == "m4a":
-                        html_string = html_string + "\t\t\t<audio controls>\n"
-                        html_string = html_string + "\t\t\t\t<source src=\"" + str(item["path"]) + "\" type=\"audio/mpeg\">\n"
-                        html_string = html_string + "\t\t\t</audio>\n"
-                    else:
-                        html_string = html_string + "\t\t\t<img src=\"" + str(item["path"]) + "\" alt=\"Caption: " + str(caption).replace("\"", "'") + "\">\n"
+                        if str(item["path"]).split(".")[-1] == "mp4":
+                            html_string = html_string + "\t\t\t<video controls>\n"
+                            html_string = html_string + "\t\t\t\t<source src=\"" + str(item["path"]) + "\" type=\"video/mp4\">\n"
+                            html_string = html_string + "\t\t\t</video>\n"
+                        elif str(item["path"]).split(".")[-1] == "m4a":
+                            html_string = html_string + "\t\t\t<audio controls>\n"
+                            html_string = html_string + "\t\t\t\t<source src=\"" + str(item["path"]) + "\" type=\"audio/mpeg\">\n"
+                            html_string = html_string + "\t\t\t</audio>\n"
+                        else:
+                            html_string = html_string + "\t\t\t<img src=\"" + str(item["path"]) + "\" alt=\"Caption: " + str(caption).replace("\"", "'") + "\">\n"
 
-                    html_string = html_string + "\t\t</li>\n"
-        except Exception as e:
-            print("ERROR reading direct media!")
-            tb.print_exc()
-            errors.append(str(repr(e)))
-            errors.append("Detailed Traceback:")
-            errors.append(tb.format_exc())
-            status = status + 1
+                        html_string = html_string + "\t\t</li>\n"
+            except Exception as e:
+                print("ERROR reading direct media!")
+                tb.print_exc()
+                errors.append(str(repr(e)))
+                errors.append("Detailed Traceback:")
+                errors.append(tb.format_exc())
+                status = status + 1
+
     except Exception as e:
         print("ERROR reading media!")
         tb.print_exc()
@@ -662,57 +662,60 @@ def read_comments(filename = "comments.json"):
             errors.append(tb.format_exc())
             status = status + 1
 
-        # live comments
-        try:
-            live_comments = data["live_comments"]
-
-            html_string = html_string + "\t</ul>\n\n<h3 id=\"livecomments\">Live Comments</h3>\n\t<ul>\n"
-
-            # this is rather experimental because I had no live comments available
+        # live comments - this field is not available in newer backups
+        if "live_comments" in data:
             try:
-                if len(live_comments) == 0:
-                    html_string = html_string + "\t\t<li>None</li>\n"
-                else:
-                    for item in live_comments:
-                        html_string = html_string + "\t\t<li>\n"
-                        html_string = html_string + "\t\t\t<b>Live Owner:</b> " + str(item[2]) + "<br>\n\t\t\t<b>Commented on:</b> " + str(item[0]) + "<br>\n\t\t\t<b>Comment:</b> " + str(item[1]) + "\n"
-                        html_string = html_string + "\t\t</li>\n"
+                live_comments = data["live_comments"]
+
+                html_string = html_string + "\t</ul>\n\n<h3 id=\"livecomments\">Live Comments</h3>\n\t<ul>\n"
+
+                # this is rather experimental because I had no live comments available
+                try:
+                    if len(live_comments) == 0:
+                        html_string = html_string + "\t\t<li>None</li>\n"
+                    else:
+                        for item in live_comments:
+                            html_string = html_string + "\t\t<li>\n"
+                            html_string = html_string + "\t\t\t<b>Live Owner:</b> " + str(item[2]) + "<br>\n\t\t\t<b>Commented on:</b> " + str(item[0]) + "<br>\n\t\t\t<b>Comment:</b> " + str(item[1]) + "\n"
+                            html_string = html_string + "\t\t</li>\n"
+                except Exception as e:
+                    print(e)
+                    pass
             except Exception as e:
-                print(e)
-                pass
-        except Exception as e:
-            print("ERROR reading live comments!")
-            tb.print_exc()
-            errors.append(str(repr(e)))
-            errors.append("Detailed Traceback:")
-            errors.append(tb.format_exc())
-            status = status + 1
+                print("ERROR reading live comments!")
+                tb.print_exc()
+                errors.append(str(repr(e)))
+                errors.append("Detailed Traceback:")
+                errors.append(tb.format_exc())
+                status = status + 1
 
-        # story comments
-        try:
-            story_comments = data["story_comments"]
-
-            html_string = html_string + "\t</ul>\n\n<h3 id=\"storycomments\">Story Comments</h3>\n\t<ul>\n"
-
-            # this is rather experimental because I had no story comments available
+        # story comments - this field is not available in newer backups
+        if "story_comments" in data:
             try:
-                if len(story_comments) == 0:
-                    html_string = html_string + "\t\t<li>None</li>\n"
-                else:
-                    for item in story_comments:
-                        html_string = html_string + "\t\t<li>\n"
-                        html_string = html_string + "\t\t\t<b>Story Owner:</b> " + str(item[2]) + "<br>\n\t\t\t<b>Commented on:</b> " + str(item[0]) + "<br>\n\t\t\t<b>Comment:</b> " + str(item[1]) + "\n"
-                        html_string = html_string + "\t\t</li>\n"
+                story_comments = data["story_comments"]
+
+                html_string = html_string + "\t</ul>\n\n<h3 id=\"storycomments\">Story Comments</h3>\n\t<ul>\n"
+
+                # this is rather experimental because I had no story comments available
+                try:
+                    if len(story_comments) == 0:
+                        html_string = html_string + "\t\t<li>None</li>\n"
+                    else:
+                        for item in story_comments:
+                            html_string = html_string + "\t\t<li>\n"
+                            html_string = html_string + "\t\t\t<b>Story Owner:</b> " + str(item[2]) + "<br>\n\t\t\t<b>Commented on:</b> " + str(item[0]) + "<br>\n\t\t\t<b>Comment:</b> " + str(item[1]) + "\n"
+                            html_string = html_string + "\t\t</li>\n"
+                except Exception as e:
+                    print(repr(e))
+                    pass
             except Exception as e:
-                print(repr(e))
-                pass
-        except Exception as e:
-            print("ERROR reading story comments!")
-            tb.print_exc()
-            errors.append(str(repr(e)))
-            errors.append("Detailed Traceback:")
-            errors.append(tb.format_exc())
-            status = status + 1
+                print("ERROR reading story comments!")
+                tb.print_exc()
+                errors.append(str(repr(e)))
+                errors.append("Detailed Traceback:")
+                errors.append(tb.format_exc())
+                status = status + 1
+
     except Exception as e:
         print("ERROR reading comments!")
         tb.print_exc()
@@ -783,14 +786,22 @@ def reverse_generate_messages_json(filename = "messages.json"):
 # for args refer to README.md
 # there are no input checks, incorrect inputs will lead to crashes!
 # so be careful if you don't want things to go sideways
-def read_messages(filename = "messages.json", profile = "profile.json", reverse_conversations = False, profile_pic = None, default_avatar = None, download_all = False, hd = False, avatars_dict = {}, http_traceback = False):
+def read_messages(filename = "messages.json", profile = "profile.json", reverse_conversations = False, profile_pic = None, default_avatar = None, download_all = False, hd = False, avatars_dict = {}, avatar_warnings = False, http_traceback = False):
+
+    GENERATED = False
 
     # generate messages.json (or specified messages json file) if not present on
     # the current file tree
     if not os.path.isfile(filename):
+        GENERATED = True
         mjson_status = generate_messages_json(filename.split(".")[0])
         if mjson_status != 0:
             print("WARNING - Generating", filename, "was unsuccessful! Trying to continue...")
+
+    # print warning for older instagram backups
+    if not GENERATED:
+        print("\n\nWARNING - you are serving an old instagram backup! You might want to consider using an older release!")
+        print("https://github.com/t0xic-m/instagram_json_viewer/tree/v2020.12.07\n\n")
 
     # error controls and logging
     status = 0
@@ -837,6 +848,7 @@ def read_messages(filename = "messages.json", profile = "profile.json", reverse_
         f.close()
 
     user_username = str(data["username"])
+    user_profile_name = str(data["name"])
 
     # setting a default avatar if None is provided
     if default_avatar is not None:
@@ -890,7 +902,7 @@ def read_messages(filename = "messages.json", profile = "profile.json", reverse_
                 profile_pic = default_avatar
 
     # function to fetch avatar for given username
-    def get_avatar(username, profile_pic = profile_pic, default = default_avatar, hd = hd, http_traceback = http_traceback):
+    def get_avatar(username, profile_pic = profile_pic, default = default_avatar, hd = hd, avatar_warnings = avatar_warnings, http_traceback = http_traceback):
 
         if str(username) == user_username:
             return profile_pic
@@ -918,10 +930,12 @@ def read_messages(filename = "messages.json", profile = "profile.json", reverse_
                     ur.urlretrieve(str(avatar_url), file_name)
                     avatar = "icons/" + str(username) + ".jpg"
                 except:
-                    print("INFO: Downloading of default avatar was unsuccessful! Avatar is still set!")
+                    if avatar_warnings:
+                        print("INFO: Downloading of default avatar was unsuccessful! Avatar is still set!")
                     avatar = default
-                print(("WARNING - error getting avatar for user " + str(username) + "!\n Set to default!"))
-                print(repr(e))
+                if avatar_warnings:
+                    print(("WARNING - error getting avatar for user " + str(username) + "!\n Set to default!"))
+                    print(repr(e))
                 if http_traceback:
                     print("Detailed Traceback:")
                     tb.print_exc()
@@ -947,6 +961,7 @@ def read_messages(filename = "messages.json", profile = "profile.json", reverse_
 
     avatars = avatars_dict
     avatars[user_username] = profile_pic
+    avatars[user_profile_name] = profile_pic
 
     for item in data:
         participants = item["participants"]
@@ -968,10 +983,16 @@ def read_messages(filename = "messages.json", profile = "profile.json", reverse_
                         avatars[participant] = str(get_avatar(participant))
                 # checks for new json structure
                 elif isinstance(participant, dict):
-                    participant = participant["name"]
+                    # ----
+                    # new json seems to be wrongly encoded and it gets really ugly from here
+                    # ----
+                    # remove any """.encode("ISO-8859-1").decode("utf-8")""" when this is fixed
+                    #
+                    participant = participant["name"].encode("ISO-8859-1").decode("utf-8")
                     participants_new.append(participant)
                     if participant not in avatars:
-                        avatars[participant] = str(get_avatar(participant))
+                        infered_participant_username = item["thread_path"].split("/")[-1].split("_")[0].split("-")[0]
+                        avatars[participant] = str(get_avatar(infered_participant_username))
                 else:
                     # this should probably throw an exception
                     participants_new = ["ERROR ", "reading participants!"]
@@ -995,7 +1016,7 @@ def read_messages(filename = "messages.json", profile = "profile.json", reverse_
                     # this should probably throw an exception
                     pass
 
-            html_chat_string = "<h3 id=\"" + str("".join(participants_new)) + "\">" + str(", ".join(participants_new)) + "</h3>\n\n"
+            html_chat_string = "<h3 id=\"" + "".join(participants_new) + "\">" + ", ".join(participants_new) + "</h3>\n\n"
 
             for message in conversation:
 
@@ -1007,63 +1028,116 @@ def read_messages(filename = "messages.json", profile = "profile.json", reverse_
                         html_chat_string = html_chat_string + "<div class=\"container\">\n"
                         html_chat_string = html_chat_string + "\t<img src=\"" + str(avatars[message["sender"]]) + "\" alt=\"" + str(message["sender"]).upper() + "\" class=\"left\" style=\"width:100%;\">\n"
                 elif "sender_name" in message:
-                    if message["sender_name"] == user_username:
+                    if message["sender_name"] == user_profile_name:
+                        html_chat_string = html_chat_string + "<div class=\"container darker\">\n"
+                        html_chat_string = html_chat_string + "\t<img src=\"" + str(avatars[message["sender_name"]]) + "\" alt=\"" + str(message["sender_name"]).upper() + "\" class=\"right\" style=\"width:100%;\">\n"
+                    elif message["sender_name"].encode("ISO-8859-1").decode("utf-8") == user_profile_name:
                         html_chat_string = html_chat_string + "<div class=\"container darker\">\n"
                         html_chat_string = html_chat_string + "\t<img src=\"" + str(avatars[message["sender_name"]]) + "\" alt=\"" + str(message["sender_name"]).upper() + "\" class=\"right\" style=\"width:100%;\">\n"
                     else:
-                        html_chat_string = html_chat_string + "<div class=\"container\">\n"
-                        html_chat_string = html_chat_string + "\t<img src=\"" + str(avatars[message["sender_name"]]) + "\" alt=\"" + str(message["sender_name"]).upper() + "\" class=\"left\" style=\"width:100%;\">\n"
+                        if message["sender_name"] in avatars:
+                            html_chat_string = html_chat_string + "<div class=\"container\">\n"
+                            html_chat_string = html_chat_string + "\t<img src=\"" + str(avatars[message["sender_name"]]) + "\" alt=\"" + str(message["sender_name"]).upper() + "\" class=\"left\" style=\"width:100%;\">\n"
+                        else:
+                            html_chat_string = html_chat_string + "<div class=\"container\">\n"
+                            html_chat_string = html_chat_string + "\t<img src=\"" + default_avatar + "\" alt=\"" + str(message["sender_name"]).upper() + "\" class=\"left\" style=\"width:100%;\">\n"
                 else:
                     # this should probably throw an exception
                     pass
 
-                if "media_share_url" in message:
-                    content = "\t<p>\n\t\t<img src=\"" + get_media(message["media_share_url"]) + "\"IMAGE\">\n\t\t<br>\n\t\t<b>Media Owner:</b> " + str(message["media_owner"]) + "<br>\n"
-                    content = content + "\t\t<b>Media Caption:</b> " + str(message["media_share_caption"]) + "<br>\n"
-                    if "text" in message:
-                        content = content + "\t\t<br><b>Text:</b> " + str(message["text"]) + "\n"
-                    html_chat_string = html_chat_string + content + "\t</p>\n"
-                elif "voice_media" in message:
-                    if message["voice_media"] == "Media unavailable.":
-                        content = "\t<p>\n\t\t<b>Voice Message:</b> Media unavailable.<br>\n"
+                # CONTENT
+                if "sender" in message:
+                    if "media_share_url" in message:
+                        content = "\t<p>\n\t\t<img src=\"" + get_media(message["media_share_url"]) + "\"IMAGE\">\n\t\t<br>\n\t\t<b>Media Owner:</b> " + str(message["media_owner"]) + "<br>\n"
+                        content = content + "\t\t<b>Media Caption:</b> " + str(message["media_share_caption"]) + "<br>\n"
+                        if "text" in message:
+                            content = content + "\t\t<br><b>Text:</b> " + str(message["text"]) + "\n"
+                        html_chat_string = html_chat_string + content + "\t</p>\n"
+                    elif "voice_media" in message:
+                        if message["voice_media"] == "Media unavailable.":
+                            content = "\t<p>\n\t\t<b>Voice Message:</b> Media unavailable.<br>\n"
+                        else:
+                            content = "\t<p>\n\t\t<b>Voice Message:</b>\n\t\t<br>\n\t\t\t<audio controls>\n\t\t\t\t<source src=\""
+                            content = content + get_media(message["voice_media"]) + "\" type=\"audio/mpeg\">\n\t\t\t</audio>\n\t\t<br>\n"
+                        if "text" in message:
+                            content = content + "\t\t<br><b>Text:</b> " + str(message["text"]) + "\n"
+                        html_chat_string = html_chat_string + content + "\t</p>\n"
+                    elif "media" in message:
+                        if message["media"].split("?")[0].split(".")[-1] == "mp4":
+                            content = "\t<p>\n\t\t<b>Video:</b>\n\t\t<br>\n\t\t\t<video controls>\n\t\t\t\t<source src=\""
+                            content = content + get_media(message["media"]) + "\" type=\"video/mp4\">\n\t\t\t</video>\n\t\t<br>\n"
+                        elif message["media"].split("?")[0].split(".")[-1] == "m4a":
+                            content = "\t<p>\n\t\t<b>Voice Message:</b>\n\t\t<br>\n\t\t\t<audio controls>\n\t\t\t\t<source src=\""
+                            content = content + get_media(message["media"]) + "\" type=\"audio/mpeg\">\n\t\t\t</audio>\n\t\t<br>\n"
+                        else:
+                            content = "\t<p>\n\t\t<b>Image:</b>\n\t\t<br>\n\t\t\t<img src=\"" + get_media(message["media"]) + "\" alt=\""
+                            content = content + get_media(message["media"]) + "\">\n\t\t<br>\n"
+                        if "text" in message:
+                            content = content + "\t\t<br><b>Text:</b> " + str(message["text"]) + "\n"
+                        html_chat_string = html_chat_string + content + "\t</p>\n"
+                    elif "story_share" in message:
+                        content = "\t<p>\n\t\t<b>Story Share:</b> " + str(message["story_share"]) + "<br>\n"
+                        if "text" in message:
+                            content = content + "\t\t<br><b>Text:</b> " + str(message["text"]) + "\n"
+                        html_chat_string = html_chat_string + content + "\t</p>\n"
+                    elif "link" in message:
+                        content = "\t<p>\n\t\t<b>Link:</b> <a href=\"" + str(message["link"]) + "\"> " + str(message["link"]) + "</a><br>\n"
+                        if "text" in message:
+                            content = content + "\t\t<br><b>Text:</b> " + str(message["text"]) + "\n"
+                        html_chat_string = html_chat_string + content + "\t</p>\n"
                     else:
-                        content = "\t<p>\n\t\t<b>Voice Message:</b>\n\t\t<br>\n\t\t\t<audio controls>\n\t\t\t\t<source src=\""
-                        content = content + get_media(message["voice_media"]) + "\" type=\"audio/mpeg\">\n\t\t\t</audio>\n\t\t<br>\n"
-                    if "text" in message:
-                        content = content + "\t\t<br><b>Text:</b> " + str(message["text"]) + "\n"
-                    html_chat_string = html_chat_string + content + "\t</p>\n"
-                elif "media" in message:
-                    if message["media"].split("?")[0].split(".")[-1] == "mp4":
-                        content = "\t<p>\n\t\t<b>Video:</b>\n\t\t<br>\n\t\t\t<video controls>\n\t\t\t\t<source src=\""
-                        content = content + get_media(message["media"]) + "\" type=\"video/mp4\">\n\t\t\t</video>\n\t\t<br>\n"
-                    elif message["media"].split("?")[0].split(".")[-1] == "m4a":
-                        content = "\t<p>\n\t\t<b>Voice Message:</b>\n\t\t<br>\n\t\t\t<audio controls>\n\t\t\t\t<source src=\""
-                        content = content + get_media(message["media"]) + "\" type=\"audio/mpeg\">\n\t\t\t</audio>\n\t\t<br>\n"
+                        if "text" in message:
+                            content = "\t<p>\n\t\t<b>Text:</b> " + str(message["text"]) + "\n"
+                        else:
+                            content = "\t<p>\n"
+                        html_chat_string = html_chat_string + content + "\t</p>\n"
+                elif "sender_name" in message:
+                    if "type" in message:
+                        if message["type"] == "Generic":
+                            content = "\t<p>\n"
+                            if "photos" in message:
+                                for photo_item in message["photos"]:
+                                     content = content + "\t\t<b>Image:</b>\n\t\t<br>\n\t\t\t<img src=\"../" + str(photo_item["uri"]) + "\" alt=\""
+                                     content = content + str(photo_item["uri"]) + "\">\n\t\t<br>\n"
+                            if "content" in message:
+                                content = content + "\t\t<b>Content:</b> " + str(message["content"]).encode("ISO-8859-1").decode("utf-8") + "\n"
+                            if "photos" not in message and "content" not in message:
+                                content = "\t\t<b>Content:</b> Content not available!\n"
+                            html_chat_string = html_chat_string + content + "\t</p>\n"
+                        elif message["type"] == "Share":
+                            content = "\t<p>\n"
+                            if "share" in message:
+                                share = message["share"]
+                                content = content + "\t\t<ul>\n"
+                                if "link" in share:
+                                    content = content + "\t\t\t<li><b>Link: </b><a href=\"" + str(share["link"]) + "\" target=\"_blank\">" + str(share["link"]) + "</a></li>\n"
+                                if "share_text" in share:
+                                    content = content + "\t\t\t<li><b>Share Text:</b> " + str(share["share_text"]).encode("ISO-8859-1").decode("utf-8") + "</li>\n"
+                                if "original_content_owner" in share:
+                                    content = content + "\t\t\t<li><b>Content Owner:</b> " + str(share["original_content_owner"]).encode("ISO-8859-1").decode("utf-8") + "</li>\n"
+                                if "link" not in share and "share_text" not in share and "original_content_owner" not in share:
+                                    content = content + "\t\t\t<li><b>Share:</b> Share information not available!</li>\n"
+                                content = content + "\t\t</ul>\n"
+                            if "content" in message:
+                                content = content + "\t\t<b>Content:</b> " + str(message["content"]).encode("ISO-8859-1").decode("utf-8") + "\n"
+                            if "share" not in message and "content" not in message:
+                                content = content + "\t\t<b>Share:</b> Share not available!\n"
+                            html_chat_string = html_chat_string + content + "\t</p>\n"
+                        else:
+                            print("INFO - Unknown content type detected: ", message["type"])
+                            content = "\t<p>\n\t\t<b>Content:</b> Content not available!\n"
+                            html_chat_string = html_chat_string + content + "\t</p>\n"
                     else:
-                        content = "\t<p>\n\t\t<b>Image:</b>\n\t\t<br>\n\t\t\t<img src=\"" + get_media(message["media"]) + "\" alt=\""
-                        content = content + get_media(message["media"]) + "\">\n\t\t<br>\n"
-                    if "text" in message:
-                        content = content + "\t\t<br><b>Text:</b> " + str(message["text"]) + "\n"
-                    html_chat_string = html_chat_string + content + "\t</p>\n"
-                elif "story_share" in message:
-                    content = "\t<p>\n\t\t<b>Story Share:</b> " + str(message["story_share"]) + "<br>\n"
-                    if "text" in message:
-                        content = content + "\t\t<br><b>Text:</b> " + str(message["text"]) + "\n"
-                    html_chat_string = html_chat_string + content + "\t</p>\n"
-                elif "link" in message:
-                    content = "\t<p>\n\t\t<b>Link:</b> <a href=\"" + str(message["link"]) + "\"> " + str(message["link"]) + "</a><br>\n"
-                    if "text" in message:
-                        content = content + "\t\t<br><b>Text:</b> " + str(message["text"]) + "\n"
-                    html_chat_string = html_chat_string + content + "\t</p>\n"
-                elif "content" in message:
-                    content = "\t<p>\n\t\t<b>Content:</b> " + str(message["content"]) + "\n"
-                    html_chat_string = html_chat_string + content + "\t</p>\n"
+                        print("INFO - No content type detected.")
+                        if "content" in message:
+                            content = "\t<p>\n\t\t<b>Content:</b> " + str(message["content"]).encode("ISO-8859-1").decode("utf-8") + "\n"
+                            html_chat_string = html_chat_string + content + "\t</p>\n"
+                        else:
+                            content = "\t<p>\n\t\t<b>Content:</b> Content not available!\n"
+                            html_chat_string = html_chat_string + content + "\t</p>\n"
                 else:
-                    if "text" in message:
-                        content = "\t<p>\n\t\t<b>Text:</b> " + str(message["text"]) + "\n"
-                    else:
-                        content = "\t<p>\n"
-                    html_chat_string = html_chat_string + content + "\t</p>\n"
+                    # this should probably throw an exception
+                    pass
 
                 if "sender" in message:
                     if message["sender"] == user_username:
@@ -1083,7 +1157,7 @@ def read_messages(filename = "messages.json", profile = "profile.json", reverse_
                             # throw warning?
                             html_chat_string = html_chat_string + "\t<span class=\"time-right\"> Time could not be extracted. </span>\n</div>\n\n"
                 elif "sender_name" in message:
-                    if message["sender_name"] == user_username:
+                    if message["sender_name"] == user_profile_name:
                         if "created_at" in message:
                             html_chat_string = html_chat_string + "\t<span class=\"time-left\">" + str(message["created_at"]) + "</span>\n</div>\n\n"
                         elif "timestamp_ms" in message:
@@ -1197,7 +1271,7 @@ def instaview(filenames = ["profile.json", "searches.json", "connections.json", 
             complete_log = complete_log + "\n\nFATAL ERROR reading messages!\n" + tb.format_exc() + "\n\n"
 
     if show_credits:
-        sidebar = sidebar_template + "\t<a href=\"#credits\">Credits</a>\n</div>\n"
+        sidebar = sidebar_template + "    <a href=\"#credits\">Credits</a>\n</div>\n"
     else:
         sidebar = sidebar_template + "</div>\n"
 
