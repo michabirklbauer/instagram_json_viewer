@@ -5,10 +5,9 @@
 # https://github.com/t0xic-m/
 # micha.birklbauer@gmail.com
 
-from datetime import datetime
+from datetime import datetime as dt
 import urllib.request as ur
 import traceback as tb
-import datetime
 import time
 import json
 import os
@@ -1071,7 +1070,7 @@ def read_messages(filename = "messages.json", profile = "profile.json", reverse_
                         if "created_at" in message:
                             html_chat_string = html_chat_string + "\t<span class=\"time-left\">" + str(message["created_at"]) + "</span>\n</div>\n\n"
                         elif "timestamp_ms" in message:
-                            html_chat_string = html_chat_string + "\t<span class=\"time-left\">" + str(datetime.fromtimestamp(int(message["timestamp_ms"])/1000)) + "</span>\n</div>\n\n"
+                            html_chat_string = html_chat_string + "\t<span class=\"time-left\">" + str(dt.fromtimestamp(int(message["timestamp_ms"])/1000)) + "</span>\n</div>\n\n"
                         else:
                             # throw warning?
                             html_chat_string = html_chat_string + "\t<span class=\"time-left\"> Time could not be extracted. </span>\n</div>\n\n"
@@ -1079,7 +1078,7 @@ def read_messages(filename = "messages.json", profile = "profile.json", reverse_
                         if "created_at" in message:
                             html_chat_string = html_chat_string + "\t<span class=\"time-right\">" + str(message["created_at"]) + "</span>\n</div>\n\n"
                         elif "timestamp_ms" in message:
-                            html_chat_string = html_chat_string + "\t<span class=\"time-right\">" + str(datetime.fromtimestamp(int(message["timestamp_ms"])/1000)) + "</span>\n</div>\n\n"
+                            html_chat_string = html_chat_string + "\t<span class=\"time-right\">" + str(dt.fromtimestamp(int(message["timestamp_ms"])/1000)) + "</span>\n</div>\n\n"
                         else:
                             # throw warning?
                             html_chat_string = html_chat_string + "\t<span class=\"time-right\"> Time could not be extracted. </span>\n</div>\n\n"
@@ -1088,7 +1087,7 @@ def read_messages(filename = "messages.json", profile = "profile.json", reverse_
                         if "created_at" in message:
                             html_chat_string = html_chat_string + "\t<span class=\"time-left\">" + str(message["created_at"]) + "</span>\n</div>\n\n"
                         elif "timestamp_ms" in message:
-                            html_chat_string = html_chat_string + "\t<span class=\"time-left\">" + str(datetime.fromtimestamp(int(message["timestamp_ms"])/1000)) + "</span>\n</div>\n\n"
+                            html_chat_string = html_chat_string + "\t<span class=\"time-left\">" + str(dt.fromtimestamp(int(message["timestamp_ms"])/1000)) + "</span>\n</div>\n\n"
                         else:
                             # throw warning?
                             html_chat_string = html_chat_string + "\t<span class=\"time-left\"> Time could not be extracted. </span>\n</div>\n\n"
@@ -1096,7 +1095,7 @@ def read_messages(filename = "messages.json", profile = "profile.json", reverse_
                         if "created_at" in message:
                             html_chat_string = html_chat_string + "\t<span class=\"time-right\">" + str(message["created_at"]) + "</span>\n</div>\n\n"
                         elif "timestamp_ms" in message:
-                            html_chat_string = html_chat_string + "\t<span class=\"time-right\">" + str(datetime.fromtimestamp(int(message["timestamp_ms"])/1000)) + "</span>\n</div>\n\n"
+                            html_chat_string = html_chat_string + "\t<span class=\"time-right\">" + str(dt.fromtimestamp(int(message["timestamp_ms"])/1000)) + "</span>\n</div>\n\n"
                         else:
                             # throw warning?
                             html_chat_string = html_chat_string + "\t<span class=\"time-right\"> Time could not be extracted. </span>\n</div>\n\n"
@@ -1180,7 +1179,7 @@ def instaview(filenames = ["profile.json", "searches.json", "connections.json", 
     complete_log = ""
 
     if title is None:
-        title = "<h1>INSTAGRAM DATA [" + str(datetime.datetime.today().strftime('%Y-%m-%d'))+ "]</h1>\n"
+        title = "<h1>INSTAGRAM DATA [" + str(dt.today().strftime('%Y-%m-%d'))+ "]</h1>\n"
 
     if parse[5]:
         if verbose:
