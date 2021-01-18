@@ -848,7 +848,25 @@ def read_messages(filename = "messages.json", profile = "profile.json", reverse_
         f.close()
 
     user_username = str(data["username"])
-    user_profile_name = str(data["name"])
+    try:
+        user_profile_name = str(data["name"])
+    except Exception as e:
+        try:
+            user_profile_name = str(data["full_name"])
+        except Exception as e:
+            if GENERATED:
+                print(repr(e))
+                print("ERROR extracting name from provided profile information!")
+                print("Available fields:\n")
+                for key in data:
+                    print(key, "\n")
+                print("Detailed Traceback:")
+                tb.print_exc()
+                raise Exception("read_messages()[GENERATED]: Name not found! --skipping--")
+            else:
+                # name not needed for old format
+                print("WARNING extracting name from provided profile information!")
+                user_profile_name = "first_name last_name" # just some dummy string
 
     # setting a default avatar if None is provided
     if default_avatar is not None:
