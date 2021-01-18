@@ -848,7 +848,10 @@ def read_messages(filename = "messages.json", profile = "profile.json", reverse_
         f.close()
 
     user_username = str(data["username"])
-    user_profile_name = str(data["name"])
+    if "name" in data:
+        user_profile_name = str(data["name"])
+    else:
+        user_profile_name = str(data["username"])
 
     # setting a default avatar if None is provided
     if default_avatar is not None:
