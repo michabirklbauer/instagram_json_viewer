@@ -124,7 +124,7 @@ instaview()
     - html_string (str): json converted to html.
     - status (int): Amount of encountered errors.
     - error_log (str): Log of all encountered errors.
-- **read_messages(filename = "messages.json", profile = "profile.json", reverse_conversations = False, profile_pic = None, default_avatar = None, download_all = False, hd = False, avatars_dict = {}, http_traceback = False):**  
+- **read_messages(filename = "messages.json", profile = "profile.json", reverse_conversations = False, profile_pic = None, default_avatar = None, download_all = False, hd = False, infer_usernames = False, avatars_dict = {}, http_traceback = False):**  
   Reads message information from json file and creates separate html files for each chat in new "chat" directory. Links to html pages are returned as concatenated html string together with a list of chat participants.
   - **Args:**
     - filename (str): Path to json with message information or path to folder containing messages. Default: "messages.json".
@@ -134,6 +134,7 @@ instaview()
     - default_avatar (str): Path or link to default avatar. Default: None (uses instagram.com/instagram profile picture [\[1\]](#Disclaimer)).
     - download_all (bool): If all media links should be downloaded locally. Warning: This might take a very long time! Default: False.
     - hd (bool): If high definition versions of avatars should be used or not. Default: False.
+    - infer_usernames (bool): If usernames should be infered from thread information and avatars tried to be downloaded. Default: False (Default avatars for users).
     - avatars_dict (dict): A dictionary containing usernames and corresponding paths/links to profile pictures. Argument "profile_pic" overwrites user's avatar even if specified in avatars_dict. Default: empty dict (will be populated by method itself).
     - avatar_warnings (bool): Print warnings for getting avatars. Default: False (No warnings are printed).
     - http_traceback (bool): Print the full traceback for http errors or not. Default: False (Traceback will not be printed).

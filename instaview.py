@@ -786,7 +786,7 @@ def reverse_generate_messages_json(filename = "messages.json"):
 # for args refer to README.md
 # there are no input checks, incorrect inputs will lead to crashes!
 # so be careful if you don't want things to go sideways
-def read_messages(filename = "messages.json", profile = "profile.json", reverse_conversations = False, profile_pic = None, default_avatar = None, download_all = False, hd = False, avatars_dict = {}, avatar_warnings = False, http_traceback = False):
+def read_messages(filename = "messages.json", profile = "profile.json", reverse_conversations = False, profile_pic = None, default_avatar = None, download_all = False, hd = False, infer_usernames = False, avatars_dict = {}, avatar_warnings = False, http_traceback = False):
 
     GENERATED = False
 
@@ -995,7 +995,12 @@ def read_messages(filename = "messages.json", profile = "profile.json", reverse_
                     participants_new.append(participant)
                     if participant not in avatars:
                         infered_participant_username = item["thread_path"].split("/")[-1].split("_")[0].split("-")[0]
-                        avatars[participant] = str(get_avatar(infered_participant_username))
+                        if infer_usernames:
+                            avatars[participant] = str(get_avatar(infered_participant_username))
+                        else:
+                            file_name = "chat/icons/" + str(infered_participant_username) + ".jpg"
+                            ur.urlretrieve(default_avatar, file_name)
+                            avatars[participant] = "icons/" + str(username) + ".jpg"
                 else:
                     # this should probably throw an exception
                     participants_new = ["ERROR ", "reading participants!"]
