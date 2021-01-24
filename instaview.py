@@ -1000,7 +1000,7 @@ def read_messages(filename = "messages.json", profile = "profile.json", reverse_
                         else:
                             file_name = "chat/icons/" + str(infered_participant_username) + ".jpg"
                             ur.urlretrieve(default_avatar, file_name)
-                            avatars[participant] = "icons/" + str(username) + ".jpg"
+                            avatars[participant] = "icons/" + str(infered_participant_username) + ".jpg"
                 else:
                     # this should probably throw an exception
                     participants_new = ["ERROR ", "reading participants!"]
