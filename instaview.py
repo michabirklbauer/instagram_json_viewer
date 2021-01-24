@@ -1036,7 +1036,7 @@ def read_messages(filename = "messages.json", profile = "profile.json", reverse_
                         html_chat_string = html_chat_string + "\t<img src=\"" + str(avatars[message["sender_name"]]) + "\" alt=\"" + str(message["sender_name"]).upper() + "\" class=\"right\" style=\"width:100%;\">\n"
                     elif message["sender_name"].encode("ISO-8859-1").decode("utf-8") == user_profile_name:
                         html_chat_string = html_chat_string + "<div class=\"container darker\">\n"
-                        html_chat_string = html_chat_string + "\t<img src=\"" + str(avatars[message["sender_name"]]) + "\" alt=\"" + str(message["sender_name"]).upper() + "\" class=\"right\" style=\"width:100%;\">\n"
+                        html_chat_string = html_chat_string + "\t<img src=\"" + str(avatars[user_profile_name]) + "\" alt=\"" + str(user_profile_name).upper() + "\" class=\"right\" style=\"width:100%;\">\n"
                     else:
                         if message["sender_name"] in avatars:
                             html_chat_string = html_chat_string + "<div class=\"container\">\n"
