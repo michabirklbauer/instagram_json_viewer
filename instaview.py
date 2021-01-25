@@ -786,7 +786,7 @@ def reverse_generate_messages_json(filename = "messages.json"):
 # for args refer to README.md
 # there are no input checks, incorrect inputs will lead to crashes!
 # so be careful if you don't want things to go sideways
-def read_messages(filename = "messages.json", profile = "profile.json", reverse_conversations = False, profile_pic = None, default_avatar = None, download_all = False, hd = False, avatars_dict = {}, avatar_warnings = False, http_traceback = False):
+def read_messages(filename = "messages.json", profile = "profile.json", reverse_conversations = False, profile_pic = None, default_avatar = None, download_all = False, hd = False, infer_usernames = False, avatars_dict = {}, avatar_warnings = False, http_traceback = False):
 
     GENERATED = False
 
@@ -995,7 +995,12 @@ def read_messages(filename = "messages.json", profile = "profile.json", reverse_
                     participants_new.append(participant)
                     if participant not in avatars:
                         infered_participant_username = item["thread_path"].split("/")[-1].split("_")[0].split("-")[0]
-                        avatars[participant] = str(get_avatar(infered_participant_username))
+                        if infer_usernames:
+                            avatars[participant] = str(get_avatar(infered_participant_username))
+                        else:
+                            file_name = "chat/icons/" + str(infered_participant_username) + ".jpg"
+                            ur.urlretrieve(default_avatar, file_name)
+                            avatars[participant] = "icons/" + str(infered_participant_username) + ".jpg"
                 else:
                     # this should probably throw an exception
                     participants_new = ["ERROR ", "reading participants!"]
@@ -1036,7 +1041,7 @@ def read_messages(filename = "messages.json", profile = "profile.json", reverse_
                         html_chat_string = html_chat_string + "\t<img src=\"" + str(avatars[message["sender_name"]]) + "\" alt=\"" + str(message["sender_name"]).upper() + "\" class=\"right\" style=\"width:100%;\">\n"
                     elif message["sender_name"].encode("ISO-8859-1").decode("utf-8") == user_profile_name:
                         html_chat_string = html_chat_string + "<div class=\"container darker\">\n"
-                        html_chat_string = html_chat_string + "\t<img src=\"" + str(avatars[message["sender_name"]]) + "\" alt=\"" + str(message["sender_name"]).upper() + "\" class=\"right\" style=\"width:100%;\">\n"
+                        html_chat_string = html_chat_string + "\t<img src=\"" + str(avatars[user_profile_name]) + "\" alt=\"" + str(user_profile_name).upper() + "\" class=\"right\" style=\"width:100%;\">\n"
                     else:
                         if message["sender_name"] in avatars:
                             html_chat_string = html_chat_string + "<div class=\"container\">\n"
