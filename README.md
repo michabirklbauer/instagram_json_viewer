@@ -6,8 +6,7 @@ This script transforms Instagram's data - [that you get via the Data Download To
 
 ## Important Information
 
-**Instagram now let's you download your data in HTML format - which is basically what this script does!**
-
+**Instagram now let's you download your data in HTML format - which is basically what this script does!**  
 **I would therefore recommend using their feature since it is obviously a lot better than my implementation!**
 
 If you want to convert older backups, you can still do that with these scripts:
