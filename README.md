@@ -7,11 +7,12 @@ This script transforms Instagram's data - [that you get via the Data Download To
 ## Important Information
 
 **Instagram now let's you download your data in HTML format - which is basically what this script does!**
+
 **I would therefore recommend using their feature since it is obviously a lot better than my implementation!**
 
 If you want to convert older backups, you can still do that with these scripts:
-- Backups between Dec. 2020 and Mar. 2021: [v2021.03.04](https://github.com/t0xic-m/instagram_json_viewer/tree/v2021.03.04):
-- Backups before Dec. 2020: [v2020.12.07](https://github.com/t0xic-m/instagram_json_viewer/tree/v2020.12.07).
+- Backups between Dec. 2020 and Mar. 2021: [v2021.03.04](https://github.com/t0xic-m/instagram_json_viewer/tree/v2021.03.04)
+- Backups before Dec. 2020: [v2020.12.07](https://github.com/t0xic-m/instagram_json_viewer/tree/v2020.12.07)
 
 ## Screenshots
 
