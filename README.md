@@ -28,7 +28,7 @@ If you want to convert older backups, you can still do that with these scripts:
 
 ## Requirements
 
-- Python (version 3.0 and above)
+- Python (version 3.7 and above)
 
 ## Data Download
 

@@ -30,7 +30,7 @@ Known issues can be tracked here:
 
 ## Requirements
 
-- Python (version 3.0 and above)
+- Python (version 3.7 and above)
 
 ## Data Download
 
