@@ -1,4 +1,4 @@
-# Instagram JSON / Backup Viewer
+# Instagram JSON / Backup Viewer by Micha Birklbauer
 
 This script transforms Instagram's data - [that you get via the Data Download Tool](https://www.instagram.com/download/request/) - to a readable format!
 
@@ -8,12 +8,12 @@ This script transforms Instagram's data - [that you get via the Data Download To
 **I would therefore recommend using their feature since it is obviously a lot better than my implementation!**
 
 If you want to convert older backups, you can still do that with these scripts:
-- Backups between Dec. 2020 and Mar. 2021: [v2021.03.04](https://github.com/t0xic-m/instagram_json_viewer/tree/v2021.03.04)
-- Backups before Dec. 2020: [v2020.12.07](https://github.com/t0xic-m/instagram_json_viewer/tree/v2020.12.07)
+- Backups between Dec. 2020 and Mar. 2021: [v2021.03.04](https://github.com/michabirklbauer/instagram_json_viewer/tree/v2021.03.04)
+- Backups before Dec. 2020: [v2020.12.07](https://github.com/michabirklbauer/instagram_json_viewer/tree/v2020.12.07)
 
 Known issues can be tracked here:
 
-- **[Issues](https://github.com/t0xic-m/instagram_json_viewer/issues)**
+- **[Issues](https://github.com/michabirklbauer/instagram_json_viewer/issues)**
 
 ## Screenshots
 
@@ -72,7 +72,7 @@ Tutorial Video: [https://www.youtube.com/watch?v=0CUbTkrK62M](https://www.youtub
 ```
 
 - Run "instaview.py" via commandline (recommended) or doubleclick!
-- Alternatively you can run the ["instaview.exe"](https://github.com/t0xic-m/instagram_json_viewer/releases) if you have Windows and do not have python installed (steps are the same).
+- Alternatively you can run the ["instaview.exe"](https://github.com/michabirklbauer/instagram_json_viewer/releases) if you have Windows and do not have python installed (steps are the same).
 - Check "instaview_report.html" in the browser of your choice!
 
 ## Manually setting Profile Pictures
@@ -199,15 +199,14 @@ Sidenote: This is currently only available for older instagram backups [pre 23. 
 
 ## License
 
-[MIT License](https://github.com/t0xic-m/instagram_data_download_viewer/blob/master/LICENSE.md)
+[MIT License](https://github.com/michabirklbauer/instagram_json_viewer/blob/master/LICENSE.md)
 
 ## Download
 
-- ZIP: [DOWNLOAD](https://github.com/t0xic-m/instagram_json_viewer/archive/master.zip)
-- TAR.GZ: [DOWNLOAD](https://github.com/t0xic-m/instagram_json_viewer/archive/master.tar.gz)
+- ZIP: [DOWNLOAD](https://github.com/michabirklbauer/instagram_json_viewer/archive/master.zip)
+- TAR.GZ: [DOWNLOAD](https://github.com/michabirklbauer/instagram_json_viewer/archive/master.tar.gz)
 
 ## Contact
 
-- Website: [Web](https://t0xic-m.github.io/web)
-- Website: [GitHub](https://t0xic-m.github.io/)
-- Contact: [Mail](mailto:micha.birklbauer@gmail.com)
+- Website: [michabirklbauer.github.io](https://michabirklbauer.github.io/)
+- Contact: [micha.birklbauer@gmail.com](mailto:micha.birklbauer@gmail.com)

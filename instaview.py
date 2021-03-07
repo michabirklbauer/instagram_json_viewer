@@ -2,7 +2,7 @@
 
 # INSTAGRAM JSON VIEWER
 # 2020 (c) Micha Johannes Birklbauer
-# https://github.com/t0xic-m/
+# https://github.com/michabirklbauer/
 # micha.birklbauer@gmail.com
 
 from datetime import datetime as dt
@@ -170,7 +170,7 @@ credits = \
 <h2 id="credits">Credits</h2>
 
     <p>
-        Report created with Micha Birklbauer's <a href="https://github.com/t0xic-m/instagram_json_viewer">Instagram JSON Viewer</a>.
+        Report created with Micha Birklbauer's <a href="https://github.com/michabirklbauer/instagram_json_viewer">Instagram JSON Viewer</a>.
     </p>
 """
 
@@ -801,7 +801,7 @@ def read_messages(filename = "messages.json", profile = "profile.json", reverse_
     # print warning for older instagram backups
     if not GENERATED:
         print("\n\nWARNING - you are serving an old instagram backup! You might want to consider using an older release!")
-        print("https://github.com/t0xic-m/instagram_json_viewer/tree/v2020.12.07\n\n")
+        print("https://github.com/michabirklbauer/instagram_json_viewer/tree/v2020.12.07\n\n")
 
     # error controls and logging
     status = 0
@@ -858,9 +858,9 @@ def read_messages(filename = "messages.json", profile = "profile.json", reverse_
         default_avatar = str(default_avatar)
     else:
         if hd:
-            default_avatar = "https://raw.githubusercontent.com/t0xic-m/instagram_json_viewer/master/icons/icon_hd.jpg"
+            default_avatar = "https://raw.githubusercontent.com/michabirklbauer/instagram_json_viewer/master/icons/icon_hd.jpg"
         else:
-            default_avatar = "https://raw.githubusercontent.com/t0xic-m/instagram_json_viewer/master/icons/icon.jpg"
+            default_avatar = "https://raw.githubusercontent.com/michabirklbauer/instagram_json_viewer/master/icons/icon.jpg"
 
     # setting self profile picture if None is provided
     if profile_pic is None:

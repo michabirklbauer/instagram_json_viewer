@@ -1,4 +1,4 @@
-![instaview.py](https://github.com/t0xic-m/instagram_json_viewer/workflows/instaview.py/badge.svg)
+![instaview.py](https://github.com/michabirklbauer/instagram_json_viewer/workflows/instaview.py/badge.svg)
 
 # Instagram JSON / Backup Viewer
 
@@ -10,8 +10,8 @@ This script transforms Instagram's data - [that you get via the Data Download To
 **I would therefore recommend using their feature since it is obviously a lot better than my implementation!**
 
 If you want to convert older backups, you can still do that with these scripts:
-- Backups between Dec. 2020 and Mar. 2021: [v2021.03.04](https://github.com/t0xic-m/instagram_json_viewer/tree/v2021.03.04)
-- Backups before Dec. 2020: [v2020.12.07](https://github.com/t0xic-m/instagram_json_viewer/tree/v2020.12.07)
+- Backups between Dec. 2020 and Mar. 2021: [v2021.03.04](https://github.com/michabirklbauer/instagram_json_viewer/tree/v2021.03.04)
+- Backups before Dec. 2020: [v2020.12.07](https://github.com/michabirklbauer/instagram_json_viewer/tree/v2020.12.07)
 
 ## Screenshots
 
@@ -68,7 +68,7 @@ Tutorial Video: [https://www.youtube.com/watch?v=0CUbTkrK62M](https://www.youtub
   """
   ```
 - Run "instaview.py" via commandline (recommended) or doubleclick!
-- Alternatively you can run the ["instaview.exe"](https://github.com/t0xic-m/instagram_json_viewer/releases) if you have Windows and do not have python installed (steps are the same).
+- Alternatively you can run the ["instaview.exe"](https://github.com/michabirklbauer/instagram_json_viewer/releases) if you have Windows and do not have python installed (steps are the same).
 - Check "instaview_report.html" in the browser of your choice!
 
 ## Manually setting Profile Pictures

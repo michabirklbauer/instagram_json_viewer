@@ -1,8 +1,8 @@
 theme: jekyll-theme-minimal
 title: "Instagram JSON Viewer by Micha Birklbauer"
 description: "Project Website for Instagram JSON Viewer"
-logo: https://raw.githubusercontent.com/t0xic-m/t0xic-m.github.io/master/avatar.jpg
+logo: https://raw.githubusercontent.com/michabirklbauer/projects/master/avatar.jpg
 show_downloads: "true"
 github:
-  zip_url: https://github.com/t0xic-m/instagram_json_viewer/archive/master.zip
-  tar_url: https://github.com/t0xic-m/instagram_json_viewer/archive/master.tar.gz
+  zip_url: https://github.com/michabirklbauer/instagram_json_viewer/archive/master.zip
+  tar_url: https://github.com/michabirklbauer/instagram_json_viewer/archive/master.tar.gz

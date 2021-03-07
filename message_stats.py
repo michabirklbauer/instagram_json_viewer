@@ -2,7 +2,7 @@
 
 # INSTAGRAM JSON VIEWER - Message Statistics
 # 2020 (c) Micha Johannes Birklbauer
-# https://github.com/t0xic-m/
+# https://github.com/michabirklbauer/
 # micha.birklbauer@gmail.com
 
 import pandas as pd
